@@ -2,23 +2,11 @@
 
 namespace App;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Model implements JWTSubject
 {
-
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        //defaults
-        $this->role_id=1;
-        $this->post_visibility=1;
-        $this->show_location=1;
-        $this->online=0;
-    }
 
     public function role(){
         return $this->belongsTo('App\Role');
@@ -48,6 +36,13 @@ class User extends Model
     }
 
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
-
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
