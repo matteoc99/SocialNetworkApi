@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->integer('post_visibility')->default(1);
             $table->boolean('show_location')->default(1);
             $table->boolean('online')->default(1);
-            $table->decimal('lat');
-            $table->decimal('lng');
+            $table->decimal('lat')->nullable();
+            $table->decimal('lng')->nullable();
             $table->timestamps();
             $table->rememberToken();
             $table->bigInteger('role_id')->unsigned()->default(1);

@@ -31,8 +31,6 @@ class LoginController extends Controller
             "name" => "required",
             'email' => "required",
             "password" => "required",
-            "lat" => "required",
-            "lng" => "required",
         ]);
 
         $details = $request->only(["email","password"]);
@@ -41,8 +39,6 @@ class LoginController extends Controller
         $user->name = $request->get("name");
         $user->email = $request->get("email");
         $user->password = bcrypt($request->get("password"));
-        $user->lat = $request->get("lat");
-        $user->lng = $request->get("lng");
 
         $user->save();
 
