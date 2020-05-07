@@ -27,25 +27,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            "name" => "required",
-            'email' => "required",
-            "password" => "required",
-            "lat" => "required",
-            "lng" => "required",
-        ]);
-
-        $user = new User();
-        $user->name = $request->get("name");
-        $user->email = $request->get("email");
-        $user->password = $request->get("password");
-        $user->lat = $request->get("lat");
-        $user->lng = $request->get("lng");
-
-        $user->save();
-
-        return $user;
     }
 
     /**
@@ -94,5 +75,6 @@ class UserController extends Controller
     {
         $user->myFriendships()->where("user_2_id", $friend)->delete();
         $user->friendshipsWithMe()->where("user_1_id", $friend)->delete();
+        $user->role();
     }
 }

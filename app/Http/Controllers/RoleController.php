@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
 
 class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Role[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return Role::all();
+        return $this->authUser()->role;
     }
 
     /**

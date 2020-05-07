@@ -20,14 +20,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->binary('profile_image')->nullable();
-            $table->integer('post_visibility');
-            $table->boolean('show_location');
-            $table->boolean('online');
+            $table->integer('post_visibility')->default(1);
+            $table->boolean('show_location')->default(1);
+            $table->boolean('online')->default(1);
             $table->decimal('lat');
             $table->decimal('lng');
             $table->timestamps();
             $table->rememberToken();
-            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned()->default(1);
             $table->foreign('role_id')->references('id')->on('roles');
         });
     }

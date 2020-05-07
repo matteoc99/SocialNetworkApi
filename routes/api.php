@@ -15,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//token stuff
+Route::post('/login','Auth\LoginController@login');
+Route::post('/refresh','Auth\LoginController@refresh');
+Route::post('/register','Auth\LoginController@register');
+
+
+//resources
 Route::apiResource('/user', 'UserController');
 Route::apiResource('/role', 'RoleController');
 Route::delete('/user/friends/{user}/{friend}', 'UserController@removeFriend');
 Route::get('/user/friends/{user}', 'UserController@friends');
 
-Route::post('/login','Auth\LoginController@login');
 
 Route::group(['middleware'=>'auth'],function (){
 
