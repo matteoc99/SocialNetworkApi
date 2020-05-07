@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->binary('profile_image')->nullable();
             $table->integer('post_visibility');
@@ -25,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->decimal('lat');
             $table->decimal('lng');
             $table->timestamps();
+            $table->rememberToken();
             $table->bigInteger('role_id')->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');
         });

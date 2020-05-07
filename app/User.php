@@ -2,11 +2,25 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Foundation\Auth\User as Authenticable;
 
-class User extends Model implements JWTSubject
+class User extends Authenticable implements JWTSubject
 {
+    use Notifiable;
+
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     public function role(){
         return $this->belongsTo('App\Role');

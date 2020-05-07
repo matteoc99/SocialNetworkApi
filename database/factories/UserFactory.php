@@ -10,7 +10,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         "name"=>$faker->name,
         'email' => $faker->unique()->safeEmail,
-        "password"=>"1234",
+        "password"=>bcrypt("1234"),
         "profile_image"=>null,
         "role_id"=>1,
         "post_visibility"=>1,
@@ -18,5 +18,7 @@ $factory->define(User::class, function (Faker $faker) {
         "online"=>0,
         "lat"=>$faker->latitude,
         "lng"=>$faker->longitude,
-    ];
+        'email_verified_at' => now(),
+        'remember_token' => Str::random(10),
+        ];
 });
