@@ -16,7 +16,7 @@ class Controller extends BaseController
         try{
             $user = auth()->userOrFail();
         }catch (UserNotDefinedException $exe){
-            return response()->json(["error"=>$exe->getMessage()]);
+            return response()->json(["error"=>$exe->getMessage()],401);
         }
         return $user;
     }

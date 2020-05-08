@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 //token stuff
 Route::post('/login','Auth\LoginController@login');
-Route::post('/refresh','Auth\LoginController@refresh');
+Route::get('/refresh','Auth\LoginController@refresh');
 Route::post('/register','Auth\LoginController@register');
 
 

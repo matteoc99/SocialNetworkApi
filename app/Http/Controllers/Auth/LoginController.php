@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class LoginController extends Controller
 {
@@ -20,8 +21,12 @@ class LoginController extends Controller
     }
 
     public function refresh(){
+        try{
+            $token = Auth::refresh();
 
-        $token = Auth::refresh();
+        }catch (TokenInvalidException $e){
+            return response()->json(["error"=>$e->getMessage()],401);
+        }
 
         return response()->json(["token"=>$token]);
     }
