@@ -24,7 +24,6 @@ class User extends Authenticable implements JWTSubject
 
     public function role(){
         return $this->belongsTo('App\Role');
-
     }
     public function myFriends()
     {
@@ -48,6 +47,27 @@ class User extends Authenticable implements JWTSubject
     public function friendshipsWithMe(){
         return $this->hasMany('App\Friendship',"user_2_id","id");
     }
+
+    public function myNotifications(){
+        return $this->hasMany('App\Notification');
+    }
+    public function unreadNotifications(){
+        return $this->myNotifications()->where("read","=","0")->get();
+    }
+    public function notificationEndpoint(){
+        return $this->hasMany('App\NotificationEndpoint');
+    }
+    public function userActions(){
+        return $this->hasMany('App\UserAction');
+    }
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
+
 
 
     public function getJWTIdentifier()
