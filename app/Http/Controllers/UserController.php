@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserLocationResource;
+use App\Http\Resources\UserLocationResourceCollection;
 use App\User;
 use Faker\Provider\Person;
 use Illuminate\Http\Request;
@@ -62,6 +64,10 @@ class UserController extends Controller
     public function friends()
     {
         return $this->authUser()->friends;
+    }
+   public function friendsLocation()
+    {
+        return UserLocationResource::collection($this->authUser()->friends);
     }
 
     public function removeFriend(User $user, $friend)
