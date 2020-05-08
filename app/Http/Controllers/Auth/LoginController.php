@@ -10,6 +10,12 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class LoginController extends Controller
 {
+    public function loginRequired(Request $request){
+
+        return response()->json(['error'=>'no token was provided, or it expired'],401);
+
+    }
+
     public function login(Request $request){
         $details = $request->only(["email","password"]);
 

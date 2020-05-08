@@ -25,6 +25,16 @@ class User extends Authenticable implements JWTSubject
     public function role(){
         return $this->belongsTo('App\Role');
     }
+
+    public function getIsAdminAttribute(){
+        return $this->role->id == 3;
+    }
+    public function getIsEditorAttribute(){
+        return $this->role->id >= 2;
+    }
+
+
+
     public function myFriends()
     {
         return $this->belongsToMany('App\User',"friendship","user_2_id","user_1_id")

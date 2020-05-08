@@ -15,19 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        return User::all();
+            return User::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return User
-     */
-    public function store(Request $request)
-    {
-    }
 
     /**
      * Display the specified resource.
@@ -49,7 +39,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
+        }
     }
 
     /**
@@ -61,20 +52,21 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->myFriendships()->delete();
-        $user->friendshipsWithMe()->delete();
-        $user->delete();
+        if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
+            $user->myFriendships()->delete();
+            $user->friendshipsWithMe()->delete();
+            $user->delete();
+        }
     }
 
-    public function friends(User $user)
+    public function friends()
     {
-        return $user->friends;
+        return $this->authUser()->friends;
     }
 
     public function removeFriend(User $user, $friend)
     {
-        $user->myFriendships()->where("user_2_id", $friend)->delete();
-        $user->friendshipsWithMe()->where("user_1_id", $friend)->delete();
-        $user->role();
+        $this->authUser()->myFriendships()->where("user_2_id", $friend)->delete();
+        $this->authUser()->friendshipsWithMe()->where("user_1_id", $friend)->delete();
     }
 }

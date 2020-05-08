@@ -17,19 +17,30 @@ use Illuminate\Support\Facades\Route;
 
 //token stuff
 Route::post('/login','Auth\LoginController@login');
-Route::get('/refresh','Auth\LoginController@refresh');
+Route::get('/login','Auth\LoginController@loginRequired')->name("login");
 Route::post('/register','Auth\LoginController@register');
 
-
-//resources
-Route::apiResource('/user', 'UserController');
-Route::apiResource('/role', 'RoleController');
-Route::delete('/user/friends/{user}/{friend}', 'UserController@removeFriend');
-Route::get('/user/friends/{user}', 'UserController@friends');
-
-
 Route::group(['middleware'=>'auth'],function (){
+    //token pre-expire refresh
+    Route::get('/refresh','Auth\LoginController@refresh');
 
+
+
+
+    Route::delete('/friends/{friend}', 'UserController@removeFriend');
+    Route::get('/friends', 'UserController@friends');
     Route::get('/role/{role}/user', 'RoleController@showUser');
+
+
+});
+
+Route::group(['middleware'=>['auth', 'editor']],function (){
+    Route::get('/user', 'UserController@index');
+
+
+});
+Route::group(['middleware'=>['auth', 'admin']],function (){
+    //token pre-expire refresh
+
 
 });
