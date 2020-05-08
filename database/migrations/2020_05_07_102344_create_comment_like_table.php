@@ -14,8 +14,13 @@ class CreateCommentLikeTable extends Migration
     public function up()
     {
         Schema::create('comment_like', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger("comment_id")->unsigned();
+            $table->bigInteger("user_id")->unsigned();
+            $table->primary(['comment_id', 'user_id']);
+            $table->boolean("liked");
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('comment_id')->references('id')->on('comments');
         });
     }
 

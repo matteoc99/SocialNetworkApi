@@ -15,7 +15,10 @@ class CreateNotificationEndpointsTable extends Migration
     {
         Schema::create('notification_endpoints', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->bigInteger("user_id")->unsigned();
+            $table->string("endpoint");
+            $table->dateTime("last_heartbeat");
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
