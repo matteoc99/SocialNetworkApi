@@ -77,7 +77,9 @@ class User extends Authenticable implements JWTSubject
         return $this->hasMany('App\Post');
     }
 
-
+    public function chats(){
+        return $this->belongsToMany('App\Chat')->using('App\ChatParticipant');
+    }
 
 
     public function getJWTIdentifier()
