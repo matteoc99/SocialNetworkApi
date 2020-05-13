@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login','Auth\LoginController@login');
 Route::get('/login','Auth\LoginController@loginRequired')->name("login");
 Route::post('/register','Auth\LoginController@register');
+Route::post('/test','Auth\LoginController@test');
 //});
 
 

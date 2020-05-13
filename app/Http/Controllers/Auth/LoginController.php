@@ -14,6 +14,10 @@ class LoginController extends Controller
 
         return response()->json(['error'=>'something went wrong xD'],401);
 
+    } public function test(Request $request){
+
+        return response()->json(['hi'=>'this is a test route'],200);
+
     }
 
     public function login(Request $request){
