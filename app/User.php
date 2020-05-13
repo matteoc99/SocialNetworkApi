@@ -20,6 +20,8 @@ class User extends Authenticable implements JWTSubject
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'isAdmin' => 'boolean',
+        'isEditor' => 'boolean',
     ];
 
     public function role(){

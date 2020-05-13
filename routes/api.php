@@ -3,14 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//Route::group(['middleware'=>'cors'],function (){
 
 //token stuff, no auth needed
 Route::post('/login','Auth\LoginController@login');
 Route::get('/login','Auth\LoginController@loginRequired')->name("login");
 Route::post('/register','Auth\LoginController@register');
+//});
 
 
-Route::group(['middleware'=>'auth'],function (){
+Route::group(['middleware'=>['auth']],function (){
     //authentication required routes
 
     Route::get('/refresh','Auth\LoginController@refresh');

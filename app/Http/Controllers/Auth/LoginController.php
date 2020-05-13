@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function loginRequired(Request $request){
 
-        return response()->json(['error'=>'no token was provided, or it expired'],401);
+        return response()->json(['error'=>'something went wrong xD'],401);
 
     }
 
