@@ -15,6 +15,7 @@ class CreateMediaProcessingQueuesTable extends Migration
     {
         Schema::create('media_processing_queues', function (Blueprint $table) {
             $table->id();
+            $table->uuid("uuid");
             $table->timestamps();
         });
     }
