@@ -12,6 +12,10 @@ Route::post('/register','Auth\LoginController@register');
 Route::post('/test','Auth\LoginController@test');
 //});
 
+//password reset
+Route::post('/reset', 'Auth\PasswordResetController@reset');
+Route::post('/reset/create', 'Auth\PasswordResetController@create');
+
 
 Route::group(['middleware'=>['auth']],function (){
     //authentication required routes
