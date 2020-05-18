@@ -44,6 +44,7 @@ class PostController extends Controller
         $post->media_uuid = $uuid;
         $post->file_type = $file_type;
         $post->status = 1;
+        $post->post_type = 1;
         $post->text = $request->get("text");
 
         $post->save();
