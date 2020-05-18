@@ -10,14 +10,22 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return User[]|\Illuminate\Database\Eloquent\Collection
-     */
+
+
     public function index()
     {
         return User::with("posts")->get();
+    }
+
+    public function suggestions(Request $request)
+    {
+        $request->validate([
+            "name" => "required|min:3",
+        ]);
+
+        return User::where("name","like",'%' . $request->get("name") . '%')
+            ->where("id","<>",$this->authUser()->id)
+            ->get();
     }
 
 
