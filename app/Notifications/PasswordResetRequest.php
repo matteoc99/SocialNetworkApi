@@ -42,6 +42,7 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
+
         $url = url('https://retronet.social/reset/?token='.$this->token);
 
         return (new MailMessage)

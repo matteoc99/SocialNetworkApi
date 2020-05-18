@@ -12,11 +12,7 @@ class LoginController extends Controller
 {
     public function loginRequired(Request $request){
 
-        return response()->json(['error'=>'something went wrong xD'],401);
-
-    } public function test(Request $request){
-
-        return response()->json(['hi'=>'this is a test route'],200);
+        return response()->json(['error'=>'no token was provided, it expired, or the route requires admin rights'],401);
 
     }
 

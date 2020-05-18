@@ -3,16 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Route::group(['middleware'=>'cors'],function (){
 
 //token stuff, no auth needed
 Route::post('/login','Auth\LoginController@login');
 Route::get('/login','Auth\LoginController@loginRequired')->name("login");
 Route::post('/register','Auth\LoginController@register');
-Route::post('/test','Auth\LoginController@test');
-//});
 
-//password reset
+//password reset, without auth
 Route::post('/reset', 'Auth\PasswordResetController@reset');
 Route::post('/reset/create', 'Auth\PasswordResetController@create');
 
@@ -22,20 +19,29 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::get('/refresh','Auth\LoginController@refresh');
 
-    Route::delete('/friends/{friend}', 'UserController@removeFriend');
-    Route::get('/friends', 'UserController@friends');
-    Route::get('/friends/location', 'UserController@friendsLocation');
-    Route::get('/role/{role}/user', 'RoleController@showUser');
+    Route::delete('/friends/{friend}', 'FriendshipController@removeFriend');
+    Route::get('/friends', 'FriendshipController@friends');
+    Route::get('/friends/location', 'FriendshipController@friendsLocation');
+
+    Route::post('/requestFriend/{friend}', 'FriendshipController@requestFriend');
+    Route::get('/friendrequests', 'FriendshipController@friendrequests');
+    Route::post('/acceptFriend/{friend}', 'FriendshipController@acceptFriend');
+
+    Route::get('/posts', 'PostController@index');
+
+
+    Route::get('/comments/{post}', 'CommentController@commentsOfPost');
+    Route::post('/comment/{post}', 'CommentController@store');
+    Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
+    Route::get('/suggestions', 'UserController@suggestions');
 
     Route::get('/user', 'UserController@index');
 
 });
 
 Route::group(['middleware'=>['auth', 'editor']],function (){
-    //editor only routes
 
 });
 Route::group(['middleware'=>['auth', 'admin']],function (){
-    //admin only routes
 
 });

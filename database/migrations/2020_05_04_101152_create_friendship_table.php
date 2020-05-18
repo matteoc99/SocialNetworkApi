@@ -19,6 +19,8 @@ class CreateFriendshipTable extends Migration
             $table->bigInteger('user_2_id')->unsigned();
             $table->foreign('user_2_id')->references('id')->on('users');
             $table->string("status");
+            $table->primary(['user_1_id', 'user_2_id']);
+
             $table->timestamps();
         });
     }
