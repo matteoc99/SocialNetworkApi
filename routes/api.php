@@ -25,6 +25,7 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::post('/requestFriend/{friend}', 'FriendshipController@requestFriend');
     Route::get('/friendrequests', 'FriendshipController@friendrequests');
+    Route::get('/pendingfriendrequests', 'FriendshipController@pendingfriendrequests');
     Route::post('/acceptFriend/{friend}', 'FriendshipController@acceptFriend');
 
     Route::get('/posts', 'PostController@index');

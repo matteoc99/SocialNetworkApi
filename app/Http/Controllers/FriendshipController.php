@@ -28,7 +28,11 @@ class FriendshipController extends Controller
 
     public function friendrequests()
     {
-        return response()->json(["data"=>$this->authUser()->friendshipsWithMe->where("status", 0)]);
+        return response()->json(["data"=>array_values($this->authUser()->friendshipsWithMe->where("status", 0)->toArray())]);
+    }
+    public function pendingfriendrequests()
+    {
+        return response()->json(["data"=>array_values($this->authUser()->myfriendships->where("status", 0)->toArray())]);
     }
 
     public function requestFriend($friend)
