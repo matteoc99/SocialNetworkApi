@@ -46,6 +46,7 @@ class PostController extends Controller
         $post->status = 1;
         $post->text = $request->get("text");
 
+        $post->save();
         return $post;
     }
 
