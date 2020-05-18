@@ -22,20 +22,22 @@ Route::group(['middleware'=>['auth']],function (){
     Route::delete('/friends/{friend}', 'FriendshipController@removeFriend');
     Route::get('/friends', 'FriendshipController@friends');
     Route::get('/friends/location', 'FriendshipController@friendsLocation');
-
     Route::post('/requestFriend/{friend}', 'FriendshipController@requestFriend');
     Route::get('/friendrequests', 'FriendshipController@friendrequests');
     Route::get('/pendingfriendrequests', 'FriendshipController@pendingfriendrequests');
     Route::post('/acceptFriend/{friend}', 'FriendshipController@acceptFriend');
 
     Route::get('/posts', 'PostController@index');
+    Route::post('/post', 'PostController@store');
+    Route::get('/post/{post}', 'PostController@show');
+    Route::get('/postfeed', 'PostController@postfeed');
 
 
-    Route::get('/comments/{post}', 'CommentController@commentsOfPost');
-    Route::post('/comment/{post}', 'CommentController@store');
-    Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
+    // Route::get('/comments/{post}', 'CommentController@commentsOfPost');
+    //Route::post('/comment/{post}', 'CommentController@store');
+    //Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
+
     Route::get('/suggestions', 'UserController@suggestions');
-
     Route::get('/user', 'UserController@index');
 
 });

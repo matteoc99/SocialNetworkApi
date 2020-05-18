@@ -49,7 +49,7 @@ class User extends Authenticable implements JWTSubject
     }
 
     public function getFriendsAttribute(){
-        return array_values($this->friendsWithMe()->getResults()->merge($this->myFriends()->getResults())->where("pivot.status",">",0)->toArray());
+        return $this->friendsWithMe()->getResults()->merge($this->myFriends()->getResults())->where("pivot.status",">",0);
     }
 
     public function myFriendships(){

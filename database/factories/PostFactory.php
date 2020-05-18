@@ -11,7 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
         "text" => $faker->text,
         "post_type" => 1,
         "status" => 1,
-        "post_visibility" => 1,
+        "post_visibility" =>  random_int(0, 2),
         "media_uuid" => $faker->uuid,
     ];
 });

@@ -11,7 +11,7 @@ class FriendshipController extends Controller
 {
     public function friends()
     {
-        return response()->json(["data"=>$this->authUser()->friends]);
+        return response()->json(["data"=>array_values($this->authUser()->friends->toArray())]);
 
     }
 
