@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->integer("post_type");
             $table->integer("status");
             $table->integer("post_visibility");
-            $table->uuid("media_uuid");
+            $table->uuid("media_uuid")->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
 

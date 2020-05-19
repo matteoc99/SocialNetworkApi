@@ -12,7 +12,7 @@ $factory->define(Post::class, function (Faker $faker) {
         "post_type" => 1,
         "status" => 1,
         "post_visibility" =>  random_int(0, 2),
-        "media_uuid" => "",
+        "media_uuid" => null,
         "file_type" => "",
     ];
 });
