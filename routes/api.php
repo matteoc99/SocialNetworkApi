@@ -12,6 +12,7 @@ Route::get('/',function (){
             </div>";
 });
 Route::get('/doc',"Web\DocController@doc");
+Route::get('/apidoc.json',"Web\DocController@postman")->name("apidoc.json");
 
 
 

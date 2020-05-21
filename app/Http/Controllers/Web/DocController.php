@@ -11,4 +11,8 @@ class DocController extends Controller
 
         return view("apidoc.index");
     }
+    public function postman(Request $request){
+
+        return response()->redirectTo("/doc.json");
+    }
 }

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
+/**
+ * @group AUTH
+ *
+ * endpoints for everything related to authentication
+ */
+
 class LoginController extends Controller
 {
     public function loginRequired(Request $request){

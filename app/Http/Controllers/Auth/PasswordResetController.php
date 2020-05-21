@@ -10,6 +10,13 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
+
+/**
+ * @group password reset
+ *
+ * endpoints for resetting a password
+ */
 class PasswordResetController extends Controller
 {
 

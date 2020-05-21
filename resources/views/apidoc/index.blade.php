@@ -46,8 +46,10 @@
           <!-- START_INFO -->
 <h1>Info</h1>
 <p>Welcome to the generated API reference.
+<a href="{{ route("apidoc.json") }}">Get Postman Collection</a></p>
 <!-- END_INFO -->
-<h1>general</h1>
+<h1>AUTH</h1>
+<p>endpoints for everything related to authentication</p>
 <!-- START_ba35aa39474cb98cfb31829e70eb8b74 -->
 <h2>login</h2>
 <blockquote>
@@ -135,60 +137,6 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST register</code></p>
 <!-- END_d7aad7b5ac127700500280d511a3db01 -->
-<!-- START_8941301529a1500064a684640e775ed1 -->
-<h2>reset</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost:8000/reset" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/reset"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST reset</code></p>
-<!-- END_8941301529a1500064a684640e775ed1 -->
-<!-- START_ed196951a5070020a6573ab016ae2808 -->
-<h2>reset/create</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost:8000/reset/create" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/reset/create"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST reset/create</code></p>
-<!-- END_ed196951a5070020a6573ab016ae2808 -->
 <!-- START_d07533fb356c1cce453f36f78e88d563 -->
 <h2>refresh</h2>
 <blockquote>
@@ -222,6 +170,40 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET refresh</code></p>
 <!-- END_d07533fb356c1cce453f36f78e88d563 -->
+<h1>general</h1>
+<!-- START_5cddd097958a13a153b478c5c73a07a3 -->
+<h2>doc</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/doc" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/doc"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (500):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Server Error"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET doc</code></p>
+<!-- END_5cddd097958a13a153b478c5c73a07a3 -->
 <!-- START_9e60c29c63c63da995606e142bb6e576 -->
 <h2>friends/{friend}</h2>
 <blockquote>
@@ -627,6 +609,62 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET user</code></p>
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
+<h1>password reset</h1>
+<p>endpoints for resetting a password</p>
+<!-- START_8941301529a1500064a684640e775ed1 -->
+<h2>reset</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/reset" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/reset"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST reset</code></p>
+<!-- END_8941301529a1500064a684640e775ed1 -->
+<!-- START_ed196951a5070020a6573ab016ae2808 -->
+<h2>reset/create</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/reset/create" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/reset/create"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST reset/create</code></p>
+<!-- END_ed196951a5070020a6573ab016ae2808 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">
