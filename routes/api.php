@@ -4,6 +4,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+//web stuff
+Route::get('/',function (){
+    return "<div style='width: 100%;text-align: center'>
+                <h1>Nothing to see here, API only</h1>
+                <a href='/doc'>API - documentation</a>
+            </div>";
+});
+Route::get('/doc',"Web\DocController@doc");
+
+
+
 //token stuff, no auth needed
 Route::post('/login','Auth\LoginController@login');
 Route::get('/login','Auth\LoginController@loginRequired')->name("login");
