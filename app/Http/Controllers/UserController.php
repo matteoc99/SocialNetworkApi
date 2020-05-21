@@ -8,15 +8,31 @@ use App\User;
 use Faker\Provider\Person;
 use Illuminate\Http\Request;
 
+/**
+ * @group User
+ *
+ * APIs for managing user
+ */
+
 class UserController extends Controller
 {
 
-
+    /**
+     *
+     * Show all user with posts
+     * ADMIN ONLY
+     * @authenticated
+     */
     public function index()
     {
         return User::with("posts")->get();
     }
-
+    /**
+     * Suggestions
+     * user suggestions given a part of the name
+     * @bodyParam name string required the name to search for
+     * @authenticated
+     */
     public function suggestions(Request $request)
     {
         $request->validate([

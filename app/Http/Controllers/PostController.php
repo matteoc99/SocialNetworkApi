@@ -7,13 +7,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Ramsey\Collection\Collection;
 
+/**
+ * @group Posts
+ *
+ * APIs for managing posts
+ */
 class PostController extends Controller
 {
 
+    /**
+     * @authenticated
+     * @response Posts of the authenticated user
+     */
     public function index()
     {
         return $this->authUser()->posts;
     }
+    /**
+     *
+     * Posts of Friends
+     * @authenticated
+     */
     public function postfeed()
     {
         return array_values(
@@ -23,6 +37,14 @@ class PostController extends Controller
                 ->toArray());
     }
 
+
+    /**
+     *
+     * Store a new post
+     * @authenticated
+     * @bodyParam text string required The content of the post
+     * @bodyParam media image The media-file of the post
+     */
 
     public function store(Request $request)
     {
@@ -48,12 +70,6 @@ class PostController extends Controller
         $post->text = $request->get("text");
 
         $post->save();
-        return $post;
-    }
-
-
-    public function show(Post $post)
-    {
         return $post;
     }
 

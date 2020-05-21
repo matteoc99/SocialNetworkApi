@@ -20,6 +20,12 @@ use Illuminate\Http\Request;
 class PasswordResetController extends Controller
 {
 
+    /**
+     *
+     * Issue a reset Request
+     * @bodyParam email string required The email of the user to reset
+     */
+
     public function create(Request $request)
     {
 
@@ -48,6 +54,13 @@ class PasswordResetController extends Controller
         ],200);
     }
 
+    /**
+     *
+     * Perform a Password reset
+     * @bodyParam Token string required The token that was sent via email
+     * @bodyParam password string required The NEW password for the user
+     * @bodyParam email string required The email that token was sent to
+     */
 
     public function reset(Request $request)
     {

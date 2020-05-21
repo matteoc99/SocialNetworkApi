@@ -9,19 +9,30 @@ use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 /**
- * @group AUTH
+ * @group Authentication
  *
  * endpoints for everything related to authentication
  */
 
 class LoginController extends Controller
 {
+
+    /**
+     * Authentication Middleware
+     * Route that gets called if authentication failed
+     */
     public function loginRequired(Request $request){
 
         return response()->json(['error'=>'no token was provided, it expired, or the route requires admin rights'],401);
 
     }
 
+
+    /**
+     * Login
+     * @bodyParam email string required
+     * @bodyParam password string required
+     */
     public function login(Request $request){
         $details = $request->only(["email","password"]);
 
@@ -31,7 +42,10 @@ class LoginController extends Controller
 
         return response()->json(["token"=>$token]);
     }
-
+    /**
+     * Token Refresh
+     * Refresh JWT Token before it expires
+     */
     public function refresh(){
         try{
             $token = Auth::refresh();
@@ -42,6 +56,13 @@ class LoginController extends Controller
 
         return response()->json(["token"=>$token]);
     }
+
+    /**
+     * Register
+     * @bodyParam name string required
+     * @bodyParam email string required
+     * @bodyParam password string required
+     */
     public function register(Request $request){
 
         $request->validate([

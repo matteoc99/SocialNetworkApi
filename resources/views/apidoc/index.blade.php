@@ -45,20 +45,21 @@
       <div class="content">
           <!-- START_INFO -->
 <h1>Info</h1>
-<p>Welcome to the generated API reference.
-<a href="{{ route("apidoc.json") }}">Get Postman Collection</a></p>
+<p>Welcome to the generated API reference.</p>
 <!-- END_INFO -->
-<h1>AUTH</h1>
+<h1>Authentication</h1>
 <p>endpoints for everything related to authentication</p>
 <!-- START_ba35aa39474cb98cfb31829e70eb8b74 -->
-<h2>login</h2>
+<h2>Login</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"email":"aut","password":"aperiam"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/login"
 );
@@ -68,17 +69,47 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "aut",
+    "password": "aperiam"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST login</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+</tbody>
+</table>
 <!-- END_ba35aa39474cb98cfb31829e70eb8b74 -->
 <!-- START_66e08d3cc8222573018fed49e121e96d -->
-<h2>login</h2>
+<h2>Authentication Middleware</h2>
+<p>Route that gets called if authentication failed</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -101,24 +132,20 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "error": "no token was provided, it expired, or the route requires admin rights"
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET login</code></p>
 <!-- END_66e08d3cc8222573018fed49e121e96d -->
 <!-- START_d7aad7b5ac127700500280d511a3db01 -->
-<h2>register</h2>
+<h2>Register</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"name":"temporibus","email":"voluptas","password":"sunt"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/register"
 );
@@ -128,17 +155,53 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "temporibus",
+    "email": "voluptas",
+    "password": "sunt"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST register</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>required</td>
+</tr>
+</tbody>
+</table>
 <!-- END_d7aad7b5ac127700500280d511a3db01 -->
 <!-- START_d07533fb356c1cce453f36f78e88d563 -->
-<h2>refresh</h2>
+<h2>Token Refresh</h2>
+<p>Refresh JWT Token before it expires</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -161,51 +224,14 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET refresh</code></p>
 <!-- END_d07533fb356c1cce453f36f78e88d563 -->
-<h1>general</h1>
-<!-- START_5cddd097958a13a153b478c5c73a07a3 -->
-<h2>doc</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/doc" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/doc"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (500):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Server Error"
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET doc</code></p>
-<!-- END_5cddd097958a13a153b478c5c73a07a3 -->
+<h1>Friendships</h1>
+<p>APIs for managing friendships</p>
 <!-- START_9e60c29c63c63da995606e142bb6e576 -->
-<h2>friends/{friend}</h2>
+<h2>Remove a Friend</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -232,7 +258,8 @@ fetch(url, {
 <p><code>DELETE friends/{friend}</code></p>
 <!-- END_9e60c29c63c63da995606e142bb6e576 -->
 <!-- START_0cad3e9017c1172d259bc85def25267e -->
-<h2>friends</h2>
+<h2>List of Friends</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -255,17 +282,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET friends</code></p>
 <!-- END_0cad3e9017c1172d259bc85def25267e -->
 <!-- START_2728d2987f81a20325803f1bc7c07d40 -->
-<h2>friends/location</h2>
+<h2>Location of Friends</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -288,17 +310,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET friends/location</code></p>
 <!-- END_2728d2987f81a20325803f1bc7c07d40 -->
 <!-- START_b761fa3e16f3346e4df9591d923f4bd9 -->
-<h2>requestFriend/{friend}</h2>
+<h2>Send a Friend Request</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -325,7 +342,9 @@ fetch(url, {
 <p><code>POST requestFriend/{friend}</code></p>
 <!-- END_b761fa3e16f3346e4df9591d923f4bd9 -->
 <!-- START_e195324d4c269da3ba01eb2565f59f36 -->
-<h2>friendrequests</h2>
+<h2>Unaccepted Friend Requests</h2>
+<p>Friend Requests by other user towards me</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -348,17 +367,13 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET friendrequests</code></p>
 <!-- END_e195324d4c269da3ba01eb2565f59f36 -->
 <!-- START_4f11189a6ea5d3efc8e1e449b0256d92 -->
-<h2>pendingfriendrequests</h2>
+<h2>Pending Friend Requests</h2>
+<p>Friend Requests issued by the authenticated user</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -381,17 +396,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET pendingfriendrequests</code></p>
 <!-- END_4f11189a6ea5d3efc8e1e449b0256d92 -->
 <!-- START_d90a73fd4894e0a9fe3c486268594f8a -->
-<h2>acceptFriend/{friend}</h2>
+<h2>Accept a FriendRequest</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -417,8 +427,11 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST acceptFriend/{friend}</code></p>
 <!-- END_d90a73fd4894e0a9fe3c486268594f8a -->
+<h1>Posts</h1>
+<p>APIs for managing posts</p>
 <!-- START_b50fbd1dc666341a0aba5436344a60d9 -->
 <h2>posts</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -442,23 +455,24 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (401):</p>
+<p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
+<pre><code class="language-json">null</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET posts</code></p>
 <!-- END_b50fbd1dc666341a0aba5436344a60d9 -->
 <!-- START_6bb34778bbf4ff8243bcb491022de63a -->
-<h2>post</h2>
+<h2>Store a new post</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"text":"dolore","media":"commodi"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/post"
 );
@@ -468,50 +482,49 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "text": "dolore",
+    "media": "commodi"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST post</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>required</td>
+<td>The content of the post</td>
+</tr>
+<tr>
+<td><code>media</code></td>
+<td>image</td>
+<td>optional</td>
+<td>The media-file of the post</td>
+</tr>
+</tbody>
+</table>
 <!-- END_6bb34778bbf4ff8243bcb491022de63a -->
-<!-- START_1b753ed7556695efc8ac14916a77ed09 -->
-<h2>post/{post}</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/post/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/post/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET post/{post}</code></p>
-<!-- END_1b753ed7556695efc8ac14916a77ed09 -->
 <!-- START_c3dbf7298ec1d346dbd413512ecf72a8 -->
-<h2>postfeed</h2>
+<h2>Posts of Friends</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -534,24 +547,24 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET postfeed</code></p>
 <!-- END_c3dbf7298ec1d346dbd413512ecf72a8 -->
+<h1>User</h1>
+<p>APIs for managing user</p>
 <!-- START_5c5bb7a3528795d09ae9c636f86415fb -->
-<h2>suggestions</h2>
+<h2>Suggestions</h2>
+<p>user suggestions given a part of the name</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"name":"laboriosam"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/suggestions"
 );
@@ -561,23 +574,43 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "name": "laboriosam"
+}
+
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET suggestions</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>required</td>
+<td>the name to search for</td>
+</tr>
+</tbody>
+</table>
 <!-- END_5c5bb7a3528795d09ae9c636f86415fb -->
 <!-- START_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
-<h2>user</h2>
+<h2>Show all user with posts</h2>
+<p>ADMIN ONLY</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -600,26 +633,77 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET user</code></p>
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
+<h1>general</h1>
+<!-- START_5cddd097958a13a153b478c5c73a07a3 -->
+<h2>doc</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/doc" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/doc"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET doc</code></p>
+<!-- END_5cddd097958a13a153b478c5c73a07a3 -->
+<!-- START_b85049f3742ca2add2aa92b16da03cd7 -->
+<h2>apidoc.json</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/apidoc.json" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/apidoc.json"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET apidoc.json</code></p>
+<!-- END_b85049f3742ca2add2aa92b16da03cd7 -->
 <h1>password reset</h1>
 <p>endpoints for resetting a password</p>
 <!-- START_8941301529a1500064a684640e775ed1 -->
-<h2>reset</h2>
+<h2>Perform a Password reset</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"Token":"aut","password":"et","email":"explicabo"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset"
 );
@@ -629,24 +713,64 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "Token": "aut",
+    "password": "et",
+    "email": "explicabo"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST reset</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Token</code></td>
+<td>string</td>
+<td>required</td>
+<td>The token that was sent via email</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>required</td>
+<td>The NEW password for the user</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+<td>The email that token was sent to</td>
+</tr>
+</tbody>
+</table>
 <!-- END_8941301529a1500064a684640e775ed1 -->
 <!-- START_ed196951a5070020a6573ab016ae2808 -->
-<h2>reset/create</h2>
+<h2>Issue a reset Request</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"email":"non"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset/create"
 );
@@ -656,14 +780,38 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "non"
+}
+
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST reset/create</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+<td>The email of the user to reset</td>
+</tr>
+</tbody>
+</table>
 <!-- END_ed196951a5070020a6573ab016ae2808 -->
       </div>
       <div class="dark-box">

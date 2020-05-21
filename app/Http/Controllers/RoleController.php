@@ -6,6 +6,13 @@ use App\Role;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
 
+
+/**
+ * @group Roles
+ *
+ * APIs for managing roles
+ */
+
 class RoleController extends Controller
 {
     /**

@@ -41,7 +41,6 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::get('/posts', 'PostController@index');
     Route::post('/post', 'PostController@store');
-    Route::get('/post/{post}', 'PostController@show');
     Route::get('/postfeed', 'PostController@postfeed');
 
 
@@ -58,5 +57,6 @@ Route::group(['middleware'=>['auth', 'editor']],function (){
 
 });
 Route::group(['middleware'=>['auth', 'admin']],function (){
+    Route::get('/user', 'UserController@index');
 
 });
