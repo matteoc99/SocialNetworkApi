@@ -56,9 +56,9 @@ class PostController extends Controller
         $file_type = null;
         if($request->hasFile("media")) {
             $uuid = Str::uuid()->toString();
-            $file =  $request->file("media");
-            $file->move(base_path("/queue"), $uuid . "." .$file->getClientOriginalExtension());
-            $file_type= $file->getClientOriginalExtension();
+            $file = $request->file("media");
+            $file->move(base_path("/queue"), $uuid);
+            $file_type = $file->getClientOriginalExtension();
         }
         $post = new Post();
         $post->user_id = $this->authUser()->id;
