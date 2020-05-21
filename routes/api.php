@@ -28,6 +28,7 @@ Route::post('/reset/create', 'Auth\PasswordResetController@create');
 
 Route::group(['middleware'=>['auth']],function (){
     //authentication required routes
+    Route::get('/user', 'UserController@index');
 
     Route::get('/refresh','Auth\LoginController@refresh');
 
@@ -49,7 +50,6 @@ Route::group(['middleware'=>['auth']],function (){
     //Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
 
     Route::get('/suggestions', 'UserController@suggestions');
-    Route::get('/user', 'UserController@index');
 
 });
 
