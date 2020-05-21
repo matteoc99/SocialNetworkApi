@@ -57,6 +57,5 @@ Route::group(['middleware'=>['auth', 'editor']],function (){
 
 });
 Route::group(['middleware'=>['auth', 'admin']],function (){
-    Route::get('/user', 'UserController@index');
 
 });
