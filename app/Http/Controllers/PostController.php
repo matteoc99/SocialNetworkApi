@@ -96,6 +96,12 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+
+        if ($this->authUser()->id == $post->user->id || $this->authUser()->isEditor) {
+            $post->comments()->delete();
+            $post->delete();
+            return response("",200);
+        }
+        return response("",401);
     }
 }

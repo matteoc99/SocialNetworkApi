@@ -28,10 +28,12 @@ Route::post('/reset/create', 'Auth\PasswordResetController@create');
 
 Route::group(['middleware'=>['auth']],function (){
     //authentication required routes
+    //TODO unsecure route, shuold be admin only
     Route::get('/user', 'UserController@index');
 
     Route::get('/refresh','Auth\LoginController@refresh');
 
+    //friend stuff
     Route::delete('/friends/{friend}', 'FriendshipController@removeFriend');
     Route::get('/friends', 'FriendshipController@friends');
     Route::get('/friends/location', 'FriendshipController@friendsLocation');
@@ -51,7 +53,9 @@ Route::group(['middleware'=>['auth']],function (){
     // Route::get('/posts/{user}', 'PostController@index'); get posts of user
     //
 
-
+    Route::delete('/user/{user}', 'UserController@destroy');
+    Route::delete('/post/{post}', 'PostController@destroy');
+    Route::delete('/comment/{comment}', 'CommentController@destroy');
     /**
      * WHISLIST
      *

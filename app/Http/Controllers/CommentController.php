@@ -59,6 +59,11 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if ($this->authUser()->id == $comment->user->id || $this->authUser()->isEditor) {
+            $comment->likes->delete();
+            $comment->delete();
+            return response("",200);
+        }
+        return response("",401);
     }
 }

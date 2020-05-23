@@ -56,9 +56,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+
         if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
-            $user->myFriendships()->delete();
-            $user->friendshipsWithMe()->delete();
+            $user->myFriendships->delete();
+            $user->friendshipsWithMe->delete();
             $user->delete();
             return response("",200);
         }

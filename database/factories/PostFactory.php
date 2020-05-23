@@ -9,7 +9,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         "user_id" => random_int(1, 6),
         "text" => $faker->text,
-        "post_type" => 1,
+        "post_type" => 0,
         "status" => 1,
         "post_visibility" =>  random_int(0, 2),
         "media_uuid" => null,
