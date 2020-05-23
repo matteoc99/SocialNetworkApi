@@ -54,23 +54,38 @@ class PostController extends Controller
         ]);
         $uuid = null;
         $file_type = null;
+        $posttype=0;
         if($request->hasFile("media")) {
-            $uuid = Str::uuid()->toString();
             $file =  $request->file("media");
-            $file->move(base_path("/queue"), $uuid . "." .$file->getClientOriginalExtension());
-            $file_type= $file->getClientOriginalExtension();
+
+
+            $uuid = Str::uuid()->toString();
+            $file->move(base_path("/queue"), $uuid );
+
+            $mime = mime_content_type(base_path("/queue/") . $uuid );
+
+            if(strstr($mime, "video/")){
+                $posttype=2;
+            }else if(strstr($mime, "image/")){
+                $posttype=1;
+            }else{
+                unlink(base_path("/queue/") . $uuid);
+                $uuid =null;
+            }
+
         }
         $post = new Post();
         $post->user_id = $this->authUser()->id;
         $post->post_visibility = $this->authUser()->post_visibility;
         $post->media_uuid = $uuid;
-        $post->file_type = $file_type;
         $post->status = 1;
-        $post->post_type = 1;
+        $post->post_type = $posttype;
         $post->text = $request->get("text");
 
         $post->save();
-        return $post;
+
+        return response($post,200);
+
     }
 
 

@@ -27,6 +27,7 @@ class UserController extends Controller
     {
         return User::with("posts")->get();
     }
+
     /**
      * Suggestions
      * user suggestions given a part of the name
@@ -59,7 +60,10 @@ class UserController extends Controller
             $user->myFriendships()->delete();
             $user->friendshipsWithMe()->delete();
             $user->delete();
+            return response("",200);
         }
+        return response("",401);
+
     }
 
 

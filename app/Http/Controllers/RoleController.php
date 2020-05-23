@@ -40,7 +40,7 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param  Role  $role
-     * @return \Illuminate\Http\Response
+     * @return Role
      */
     public function show(Role $role)
     {

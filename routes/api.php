@@ -46,8 +46,22 @@ Route::group(['middleware'=>['auth']],function (){
 
 
     // Route::get('/comments/{post}', 'CommentController@commentsOfPost');
-    //Route::post('/comment/{post}', 'CommentController@store');
-    //Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
+    // Route::post('/comment/{post}', 'CommentController@store');
+    // Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
+    // Route::get('/posts/{user}', 'PostController@index'); get posts of user
+    //
+
+
+    /**
+     * WHISLIST
+     *
+     * user löschen
+     * posts löschen
+     * comment löschen
+     * post	/updateGEO	Bearer, lat, lng	updates coordinates of the user	not discussed
+     *
+     *
+     */
 
     Route::get('/suggestions', 'UserController@suggestions');
 

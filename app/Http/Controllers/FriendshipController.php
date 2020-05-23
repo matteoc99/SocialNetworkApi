@@ -43,6 +43,8 @@ class FriendshipController extends Controller
     {
         $this->authUser()->myFriendships->where("user_2_id", $friend)->delete();
         $this->authUser()->friendshipsWithMe->where("user_1_id", $friend)->delete();
+        return response("",200);
+
     }
 
     /**
@@ -76,6 +78,8 @@ class FriendshipController extends Controller
         $friendship->user_2_id = $friend;
 
         $friendship->save();
+
+        return response("",200);
     }
     /**
      * Accept a FriendRequest
@@ -89,5 +93,7 @@ class FriendshipController extends Controller
         }
         $friendReq->status = 1;
         $friendReq->update();
+        return response("",200);
+
     }
 }

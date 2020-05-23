@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MediaTypeToPosts extends Migration
+class RemoveMediaTypeFromPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class MediaTypeToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string("file_type")->nullable();
+            $table->dropColumn('file_type');
+
         });
     }
 
@@ -26,7 +27,7 @@ class MediaTypeToPosts extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('file_type');
+            $table->string("file_type")->nullable();
         });
     }
 }
