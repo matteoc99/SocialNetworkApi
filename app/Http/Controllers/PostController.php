@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Ramsey\Collection\Collection;
@@ -25,6 +26,7 @@ class PostController extends Controller
     {
         return $this->authUser()->posts;
     }
+
     /**
      *
      * Posts of Friends
@@ -37,8 +39,8 @@ class PostController extends Controller
     {
         return array_values(
             Post::all()
-                ->whereIn("user_id",$this->authUser()->friends->pluck("id"))
-                ->where("post_visibility",">=",1)
+                ->whereIn("user_id", $this->authUser()->friends->pluck("id"))
+                ->where("post_visibility", ">=", 1)
                 ->toArray());
     }
 
@@ -59,23 +61,23 @@ class PostController extends Controller
         ]);
         $uuid = null;
         $file_type = null;
-        $posttype=0;
-        if($request->hasFile("media")) {
-            $file =  $request->file("media");
+        $posttype = 0;
+        if ($request->hasFile("media")) {
+            $file = $request->file("media");
 
 
             $uuid = Str::uuid()->toString();
-            $file->move(base_path("/queue"), $uuid );
+            $file->move(base_path("/queue"), $uuid);
 
-            $mime = mime_content_type(base_path("/queue/") . $uuid );
+            $mime = mime_content_type(base_path("/queue/") . $uuid);
 
-            if(strstr($mime, "video/")){
-                $posttype=2;
-            }else if(strstr($mime, "image/")){
-                $posttype=1;
-            }else{
+            if (strstr($mime, "video/")) {
+                $posttype = 2;
+            } else if (strstr($mime, "image/")) {
+                $posttype = 1;
+            } else {
                 unlink(base_path("/queue/") . $uuid);
-                $uuid =null;
+                $uuid = null;
             }
 
         }
@@ -89,10 +91,22 @@ class PostController extends Controller
 
         $post->save();
 
-        return response($post,200);
+        return response($post, 200);
 
     }
 
+    /**
+     * Get Posts Of User
+     * gets posts of user labled as public
+     * @authenticated
+     */
+    public function postOfUser(User $user)
+    {
+        $posts = $user->posts;
+        if ($this->authUser()->id != $user->id)
+            $posts = $posts->where("post_visibility", ">", 0);
+        return  array_values($posts->toArray());
+    }
 
     public function update(Request $request, Post $post)
     {
@@ -101,7 +115,7 @@ class PostController extends Controller
 
     /**
      * Deletion
-     * deletes a user by id
+     * deletes a post by id
      * @authenticated
      */
     public function destroy(Post $post)
@@ -110,8 +124,8 @@ class PostController extends Controller
         if ($this->authUser()->id == $post->user->id || $this->authUser()->isEditor) {
             $post->comments()->delete();
             $post->delete();
-            return response("",200);
+            return response("", 200);
         }
-        return response("",401);
+        return response("", 401);
     }
 }

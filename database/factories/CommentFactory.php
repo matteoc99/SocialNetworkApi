@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Comment::class, function (Faker $faker) {
     return [
-        "user_id" => random_int(1, 5),
+        "user_id" => random_int(1, 6),
         "post_id" => random_int(1, 50),
         "content" => $faker->sentence,
         "parent_id" => null,

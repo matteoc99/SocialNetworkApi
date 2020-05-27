@@ -28,8 +28,14 @@ Route::post('/reset/create', 'Auth\PasswordResetController@create');
 
 Route::group(['middleware'=>['auth']],function (){
     //authentication required routes
+
     //TODO unsecure route, shuold be admin only
     Route::get('/user', 'UserController@index');
+
+   // Route::delete('/user/{user}', 'UserController@destroy');
+    Route::post('/updateGeo', 'UserController@changeLoc');
+    Route::get('/user/{user}', 'UserController@show');
+
 
     Route::get('/refresh','Auth\LoginController@refresh');
 
@@ -45,19 +51,18 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/posts', 'PostController@index');
     Route::post('/post', 'PostController@store');
     Route::get('/postfeed', 'PostController@postfeed');
-
-
-    // Route::get('/comments/{post}', 'CommentController@commentsOfPost');
-    // Route::post('/comment/{post}', 'CommentController@store');
-    // Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
-    // Route::get('/posts/{user}', 'PostController@index'); get posts of user
-    //
-
-    Route::delete('/user/{user}', 'UserController@destroy');
+    Route::get('/posts/{user}', 'PostController@postOfUser');
     Route::delete('/post/{post}', 'PostController@destroy');
+
+
+    Route::get('/comments', 'CommentController@index');
+    Route::get('/comments/{post}', 'CommentController@commentsOfPost');
+    Route::post('/comment/{post}', 'CommentController@store');
+    Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
     Route::delete('/comment/{comment}', 'CommentController@destroy');
-    Route::post('/updateGeo', 'UserController@changeLoc');
-    Route::get('/user/{user}', 'UserController@show');
+
+
+
     /**
      * WHISLIST
      *

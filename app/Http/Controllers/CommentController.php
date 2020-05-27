@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 /**
  * @group Comments
@@ -12,35 +13,69 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * My Comments
+     * returns comments of authenticated user
+     * @authenticated
      */
     public function index()
     {
-        //
+        return $this->authUser()->comments;
     }
 
     /**
-     * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Store a new Comment
+     * @authenticated
+     * @bodyParam text string required The content of the comment
      */
-    public function store(Request $request)
+    public function store(Request $request,Post $post)
     {
-        //
+
+        $request->validate([
+            "text" => "required",
+        ]);
+
+        $comment = new Comment();
+        $comment->post_id = $post->id;
+        $comment->user_id = $this->authUser()->id;
+        $comment->parent_id = null;
+        $comment->content = $request->get("text");
+        $comment->save();
+        return response($comment,200);
     }
 
     /**
-     * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * Store a new nested Comment
+     *
+     * used to store a response to another comment
+     *
+     * @authenticated
+     * @bodyParam text string required The content of the comment
      */
-    public function show(Comment $comment)
+    public function storeNested(Request $request,Post $post,Comment $comment)
     {
-        //
+
+        $request->validate([
+            "text" => "required",
+        ]);
+        $c = new Comment();
+        $c->post_id = $post->id;
+        $c->user_id = $this->authUser()->id;
+        $c->parent_id = $comment->id;
+        $c->content = $request->get("text");
+        $c->save();
+        return response($c,200);
+    }
+
+    /**
+     * Comments of Post
+     * @authenticated
+     * @bodyParam text string required The content of the comment
+     */
+    public function commentsOfPost(Post $post)
+    {
+        return Comment::where(['post_id'=>$post->id,'parent_id'=>null])->get();
     }
 
     /**

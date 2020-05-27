@@ -33,7 +33,7 @@ curl -X POST \
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"et","password":"qui"}'
+    -d '{"email":"itaque","password":"est"}'
 
 ```
 
@@ -48,8 +48,8 @@ let headers = {
 };
 
 let body = {
-    "email": "et",
-    "password": "qui"
+    "email": "itaque",
+    "password": "est"
 }
 
 fetch(url, {
@@ -123,7 +123,7 @@ curl -X POST \
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"cumque","email":"porro","password":"molestiae"}'
+    -d '{"name":"nam","email":"maxime","password":"voluptates"}'
 
 ```
 
@@ -138,9 +138,9 @@ let headers = {
 };
 
 let body = {
-    "name": "cumque",
-    "email": "porro",
-    "password": "molestiae"
+    "name": "nam",
+    "email": "maxime",
+    "password": "voluptates"
 }
 
 fetch(url, {
@@ -209,6 +209,198 @@ fetch(url, {
 
 
 APIs for managing comments
+<!-- START_d728f2176d9cdd509e70b4addfa59568 -->
+## My Comments
+returns comments of authenticated user
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost:8000/comments" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/comments"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET comments`
+
+
+<!-- END_d728f2176d9cdd509e70b4addfa59568 -->
+
+<!-- START_56e2420b314458eadaf3096d82dbb1b2 -->
+## Comments of Post
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost:8000/comments/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"dicta"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/comments/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "dicta"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET comments/{post}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `text` | string |  required  | The content of the comment
+    
+<!-- END_56e2420b314458eadaf3096d82dbb1b2 -->
+
+<!-- START_06387704dc60a91d3f9a316443d3e4ff -->
+## Store a new Comment
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost:8000/comment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"impedit"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/comment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "impedit"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST comment/{post}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `text` | string |  required  | The content of the comment
+    
+<!-- END_06387704dc60a91d3f9a316443d3e4ff -->
+
+<!-- START_3b99fcc718600046560c8d70d914ca0e -->
+## Store a new nested Comment
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+used to store a response to another comment
+
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost:8000/comment/1/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"neque"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/comment/1/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "neque"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST comment/{post}/{comment}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `text` | string |  required  | The content of the comment
+    
+<!-- END_3b99fcc718600046560c8d70d914ca0e -->
+
 <!-- START_96f948918a2fdce8e599741680346e3d -->
 ## Deletion
 deletes a Comment by id
@@ -588,7 +780,7 @@ curl -X POST \
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"est","media":"dolorum"}'
+    -d '{"text":"hic","media":"accusamus"}'
 
 ```
 
@@ -603,8 +795,8 @@ let headers = {
 };
 
 let body = {
-    "text": "est",
-    "media": "dolorum"
+    "text": "hic",
+    "media": "accusamus"
 }
 
 fetch(url, {
@@ -670,9 +862,49 @@ fetch(url, {
 
 <!-- END_c3dbf7298ec1d346dbd413512ecf72a8 -->
 
+<!-- START_33345ce527d368828335eb98787f5643 -->
+## Get Posts Of User
+gets posts of user labled as public
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost:8000/posts/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/posts/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET posts/{user}`
+
+
+<!-- END_33345ce527d368828335eb98787f5643 -->
+
 <!-- START_28879fe61d51a12419cf43f57cefa40c -->
 ## Deletion
-deletes a user by id
+deletes a post by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -754,46 +986,6 @@ fetch(url, {
 
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
 
-<!-- START_c3f689a804341d95e136d0131312e64f -->
-## Deletion
-deletes a user by id
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost:8000/user/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost:8000/user/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE user/{user}`
-
-
-<!-- END_c3f689a804341d95e136d0131312e64f -->
-
 <!-- START_8de0eef03624ee766aa467538721f96b -->
 ## Update Geo Position
 
@@ -805,7 +997,7 @@ curl -X POST \
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"vel","lng":"ratione"}'
+    -d '{"lat":"hic","lng":"et"}'
 
 ```
 
@@ -820,8 +1012,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "vel",
-    "lng": "ratione"
+    "lat": "hic",
+    "lng": "et"
 }
 
 fetch(url, {
@@ -898,7 +1090,7 @@ curl -X GET \
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ut"}'
+    -d '{"name":"sit"}'
 
 ```
 
@@ -913,7 +1105,7 @@ let headers = {
 };
 
 let body = {
-    "name": "ut"
+    "name": "sit"
 }
 
 fetch(url, {
@@ -1028,7 +1220,7 @@ curl -X POST \
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"ad","password":"aut","email":"maxime"}'
+    -d '{"Token":"facere","password":"perspiciatis","email":"eos"}'
 
 ```
 
@@ -1043,9 +1235,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "ad",
-    "password": "aut",
-    "email": "maxime"
+    "Token": "facere",
+    "password": "perspiciatis",
+    "email": "eos"
 }
 
 fetch(url, {
@@ -1081,7 +1273,7 @@ curl -X POST \
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"nostrum"}'
+    -d '{"email":"qui"}'
 
 ```
 
@@ -1096,7 +1288,7 @@ let headers = {
 };
 
 let body = {
-    "email": "nostrum"
+    "email": "qui"
 }
 
 fetch(url, {

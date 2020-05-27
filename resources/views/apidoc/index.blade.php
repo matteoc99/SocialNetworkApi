@@ -58,7 +58,7 @@
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"et","password":"qui"}'
+    -d '{"email":"itaque","password":"est"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/login"
@@ -70,8 +70,8 @@ let headers = {
 };
 
 let body = {
-    "email": "et",
-    "password": "qui"
+    "email": "itaque",
+    "password": "est"
 }
 
 fetch(url, {
@@ -144,7 +144,7 @@ fetch(url, {
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"cumque","email":"porro","password":"molestiae"}'
+    -d '{"name":"nam","email":"maxime","password":"voluptates"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/register"
@@ -156,9 +156,9 @@ let headers = {
 };
 
 let body = {
-    "name": "cumque",
-    "email": "porro",
-    "password": "molestiae"
+    "name": "nam",
+    "email": "maxime",
+    "password": "voluptates"
 }
 
 fetch(url, {
@@ -229,6 +229,198 @@ fetch(url, {
 <!-- END_d07533fb356c1cce453f36f78e88d563 -->
 <h1>Comments</h1>
 <p>APIs for managing comments</p>
+<!-- START_d728f2176d9cdd509e70b4addfa59568 -->
+<h2>My Comments</h2>
+<p>returns comments of authenticated user</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/comments" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/comments"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET comments</code></p>
+<!-- END_d728f2176d9cdd509e70b4addfa59568 -->
+<!-- START_56e2420b314458eadaf3096d82dbb1b2 -->
+<h2>Comments of Post</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/comments/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"dicta"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/comments/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "dicta"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET comments/{post}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>required</td>
+<td>The content of the comment</td>
+</tr>
+</tbody>
+</table>
+<!-- END_56e2420b314458eadaf3096d82dbb1b2 -->
+<!-- START_06387704dc60a91d3f9a316443d3e4ff -->
+<h2>Store a new Comment</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/comment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"impedit"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/comment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "impedit"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST comment/{post}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>required</td>
+<td>The content of the comment</td>
+</tr>
+</tbody>
+</table>
+<!-- END_06387704dc60a91d3f9a316443d3e4ff -->
+<!-- START_3b99fcc718600046560c8d70d914ca0e -->
+<h2>Store a new nested Comment</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+used to store a response to another comment</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/comment/1/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"neque"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/comment/1/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "neque"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST comment/{post}/{comment}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>required</td>
+<td>The content of the comment</td>
+</tr>
+</tbody>
+</table>
+<!-- END_3b99fcc718600046560c8d70d914ca0e -->
 <!-- START_96f948918a2fdce8e599741680346e3d -->
 <h2>Deletion</h2>
 <p>deletes a Comment by id</p>
@@ -503,7 +695,7 @@ fetch(url, {
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"est","media":"dolorum"}'
+    -d '{"text":"hic","media":"accusamus"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/post"
@@ -515,8 +707,8 @@ let headers = {
 };
 
 let body = {
-    "text": "est",
-    "media": "dolorum"
+    "text": "hic",
+    "media": "accusamus"
 }
 
 fetch(url, {
@@ -583,9 +775,38 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET postfeed</code></p>
 <!-- END_c3dbf7298ec1d346dbd413512ecf72a8 -->
+<!-- START_33345ce527d368828335eb98787f5643 -->
+<h2>Get Posts Of User</h2>
+<p>gets posts of user labled as public</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost:8000/posts/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/posts/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET posts/{user}</code></p>
+<!-- END_33345ce527d368828335eb98787f5643 -->
 <!-- START_28879fe61d51a12419cf43f57cefa40c -->
 <h2>Deletion</h2>
-<p>deletes a user by id</p>
+<p>deletes a post by id</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -643,35 +864,6 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET user</code></p>
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
-<!-- START_c3f689a804341d95e136d0131312e64f -->
-<h2>Deletion</h2>
-<p>deletes a user by id</p>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X DELETE \
-    "http://localhost:8000/user/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/user/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>DELETE user/{user}</code></p>
-<!-- END_c3f689a804341d95e136d0131312e64f -->
 <!-- START_8de0eef03624ee766aa467538721f96b -->
 <h2>Update Geo Position</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
@@ -682,7 +874,7 @@ fetch(url, {
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"vel","lng":"ratione"}'
+    -d '{"lat":"hic","lng":"et"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/updateGeo"
@@ -694,8 +886,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "vel",
-    "lng": "ratione"
+    "lat": "hic",
+    "lng": "et"
 }
 
 fetch(url, {
@@ -773,7 +965,7 @@ fetch(url, {
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ut"}'
+    -d '{"name":"sit"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/suggestions"
@@ -785,7 +977,7 @@ let headers = {
 };
 
 let body = {
-    "name": "ut"
+    "name": "sit"
 }
 
 fetch(url, {
@@ -883,7 +1075,7 @@ fetch(url, {
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"ad","password":"aut","email":"maxime"}'
+    -d '{"Token":"facere","password":"perspiciatis","email":"eos"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset"
@@ -895,9 +1087,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "ad",
-    "password": "aut",
-    "email": "maxime"
+    "Token": "facere",
+    "password": "perspiciatis",
+    "email": "eos"
 }
 
 fetch(url, {
@@ -950,7 +1142,7 @@ fetch(url, {
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"nostrum"}'
+    -d '{"email":"qui"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset/create"
@@ -962,7 +1154,7 @@ let headers = {
 };
 
 let body = {
-    "email": "nostrum"
+    "email": "qui"
 }
 
 fetch(url, {
