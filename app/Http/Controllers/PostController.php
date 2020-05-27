@@ -16,6 +16,8 @@ class PostController extends Controller
 {
 
     /**
+     * My Posts
+     * returns a list of all posts of the user
      * @authenticated
      * @response Posts of the authenticated user
      */
@@ -26,6 +28,9 @@ class PostController extends Controller
     /**
      *
      * Posts of Friends
+     *
+     * Returns the posts of friends
+     *
      * @authenticated
      */
     public function postfeed()

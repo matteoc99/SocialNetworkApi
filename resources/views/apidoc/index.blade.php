@@ -58,7 +58,7 @@
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quibusdam","password":"sed"}'
+    -d '{"email":"et","password":"qui"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/login"
@@ -70,8 +70,8 @@ let headers = {
 };
 
 let body = {
-    "email": "quibusdam",
-    "password": "sed"
+    "email": "et",
+    "password": "qui"
 }
 
 fetch(url, {
@@ -144,7 +144,7 @@ fetch(url, {
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ut","email":"facilis","password":"facilis"}'
+    -d '{"name":"cumque","email":"porro","password":"molestiae"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/register"
@@ -156,9 +156,9 @@ let headers = {
 };
 
 let body = {
-    "name": "ut",
-    "email": "facilis",
-    "password": "facilis"
+    "name": "cumque",
+    "email": "porro",
+    "password": "molestiae"
 }
 
 fetch(url, {
@@ -461,7 +461,8 @@ fetch(url, {
 <h1>Posts</h1>
 <p>APIs for managing posts</p>
 <!-- START_b50fbd1dc666341a0aba5436344a60d9 -->
-<h2>posts</h2>
+<h2>My Posts</h2>
+<p>returns a list of all posts of the user</p>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
@@ -502,7 +503,7 @@ fetch(url, {
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"voluptatem","media":"modi"}'
+    -d '{"text":"est","media":"dolorum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/post"
@@ -514,8 +515,8 @@ let headers = {
 };
 
 let body = {
-    "text": "voluptatem",
-    "media": "modi"
+    "text": "est",
+    "media": "dolorum"
 }
 
 fetch(url, {
@@ -555,7 +556,8 @@ fetch(url, {
 <!-- END_6bb34778bbf4ff8243bcb491022de63a -->
 <!-- START_c3dbf7298ec1d346dbd413512ecf72a8 -->
 <h2>Posts of Friends</h2>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Returns the posts of friends</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -680,7 +682,7 @@ fetch(url, {
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"ex","lng":"sed"}'
+    -d '{"lat":"vel","lng":"ratione"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/updateGeo"
@@ -692,8 +694,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "ex",
-    "lng": "sed"
+    "lat": "vel",
+    "lng": "ratione"
 }
 
 fetch(url, {
@@ -771,7 +773,7 @@ fetch(url, {
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ea"}'
+    -d '{"name":"ut"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/suggestions"
@@ -783,7 +785,7 @@ let headers = {
 };
 
 let body = {
-    "name": "ea"
+    "name": "ut"
 }
 
 fetch(url, {
@@ -881,7 +883,7 @@ fetch(url, {
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"est","password":"porro","email":"qui"}'
+    -d '{"Token":"ad","password":"aut","email":"maxime"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset"
@@ -893,9 +895,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "est",
-    "password": "porro",
-    "email": "qui"
+    "Token": "ad",
+    "password": "aut",
+    "email": "maxime"
 }
 
 fetch(url, {
@@ -948,7 +950,7 @@ fetch(url, {
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ad"}'
+    -d '{"email":"nostrum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset/create"
@@ -960,7 +962,7 @@ let headers = {
 };
 
 let body = {
-    "email": "ad"
+    "email": "nostrum"
 }
 
 fetch(url, {

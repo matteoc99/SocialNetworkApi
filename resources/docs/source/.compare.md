@@ -33,7 +33,7 @@ curl -X POST \
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quibusdam","password":"sed"}'
+    -d '{"email":"et","password":"qui"}'
 
 ```
 
@@ -48,8 +48,8 @@ let headers = {
 };
 
 let body = {
-    "email": "quibusdam",
-    "password": "sed"
+    "email": "et",
+    "password": "qui"
 }
 
 fetch(url, {
@@ -123,7 +123,7 @@ curl -X POST \
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ut","email":"facilis","password":"facilis"}'
+    -d '{"name":"cumque","email":"porro","password":"molestiae"}'
 
 ```
 
@@ -138,9 +138,9 @@ let headers = {
 };
 
 let body = {
-    "name": "ut",
-    "email": "facilis",
-    "password": "facilis"
+    "name": "cumque",
+    "email": "porro",
+    "password": "molestiae"
 }
 
 fetch(url, {
@@ -533,7 +533,9 @@ fetch(url, {
 
 APIs for managing posts
 <!-- START_b50fbd1dc666341a0aba5436344a60d9 -->
-## posts
+## My Posts
+returns a list of all posts of the user
+
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
@@ -586,7 +588,7 @@ curl -X POST \
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"voluptatem","media":"modi"}'
+    -d '{"text":"est","media":"dolorum"}'
 
 ```
 
@@ -601,8 +603,8 @@ let headers = {
 };
 
 let body = {
-    "text": "voluptatem",
-    "media": "modi"
+    "text": "est",
+    "media": "dolorum"
 }
 
 fetch(url, {
@@ -631,6 +633,8 @@ Parameter | Type | Status | Description
 ## Posts of Friends
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Returns the posts of friends
+
 > Example request:
 
 ```bash
@@ -801,7 +805,7 @@ curl -X POST \
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"ex","lng":"sed"}'
+    -d '{"lat":"vel","lng":"ratione"}'
 
 ```
 
@@ -816,8 +820,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "ex",
-    "lng": "sed"
+    "lat": "vel",
+    "lng": "ratione"
 }
 
 fetch(url, {
@@ -894,7 +898,7 @@ curl -X GET \
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"ea"}'
+    -d '{"name":"ut"}'
 
 ```
 
@@ -909,7 +913,7 @@ let headers = {
 };
 
 let body = {
-    "name": "ea"
+    "name": "ut"
 }
 
 fetch(url, {
@@ -1024,7 +1028,7 @@ curl -X POST \
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"est","password":"porro","email":"qui"}'
+    -d '{"Token":"ad","password":"aut","email":"maxime"}'
 
 ```
 
@@ -1039,9 +1043,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "est",
-    "password": "porro",
-    "email": "qui"
+    "Token": "ad",
+    "password": "aut",
+    "email": "maxime"
 }
 
 fetch(url, {
@@ -1077,7 +1081,7 @@ curl -X POST \
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"ad"}'
+    -d '{"email":"nostrum"}'
 
 ```
 
@@ -1092,7 +1096,7 @@ let headers = {
 };
 
 let body = {
-    "email": "ad"
+    "email": "nostrum"
 }
 
 fetch(url, {
