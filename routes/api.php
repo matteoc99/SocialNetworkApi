@@ -56,12 +56,12 @@ Route::group(['middleware'=>['auth']],function (){
     Route::delete('/user/{user}', 'UserController@destroy');
     Route::delete('/post/{post}', 'PostController@destroy');
     Route::delete('/comment/{comment}', 'CommentController@destroy');
+    Route::post('/updateGeo', 'UserController@changeLoc');
+    Route::get('/user/{user}', 'UserController@show');
     /**
      * WHISLIST
      *
-     * user löschen
-     * posts löschen
-     * comment löschen
+
      * post	/updateGEO	Bearer, lat, lng	updates coordinates of the user	not discussed
      *
      *

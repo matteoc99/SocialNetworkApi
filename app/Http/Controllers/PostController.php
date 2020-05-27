@@ -94,6 +94,11 @@ class PostController extends Controller
         //
     }
 
+    /**
+     * Deletion
+     * deletes a user by id
+     * @authenticated
+     */
     public function destroy(Post $post)
     {
 

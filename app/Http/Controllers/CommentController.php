@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
-
+/**
+ * @group Comments
+ *
+ * APIs for managing comments
+ */
 class CommentController extends Controller
 {
     /**
@@ -52,15 +56,13 @@ class CommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * Deletion
+     * deletes a Comment by id
+     * @authenticated
      */
     public function destroy(Comment $comment)
     {
         if ($this->authUser()->id == $comment->user->id || $this->authUser()->isEditor) {
-            $comment->likes->delete();
             $comment->delete();
             return response("",200);
         }

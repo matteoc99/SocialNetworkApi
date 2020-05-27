@@ -33,7 +33,7 @@ curl -X POST \
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"aut","password":"aperiam"}'
+    -d '{"email":"quibusdam","password":"sed"}'
 
 ```
 
@@ -48,8 +48,8 @@ let headers = {
 };
 
 let body = {
-    "email": "aut",
-    "password": "aperiam"
+    "email": "quibusdam",
+    "password": "sed"
 }
 
 fetch(url, {
@@ -123,7 +123,7 @@ curl -X POST \
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"temporibus","email":"voluptas","password":"sunt"}'
+    -d '{"name":"ut","email":"facilis","password":"facilis"}'
 
 ```
 
@@ -138,9 +138,9 @@ let headers = {
 };
 
 let body = {
-    "name": "temporibus",
-    "email": "voluptas",
-    "password": "sunt"
+    "name": "ut",
+    "email": "facilis",
+    "password": "facilis"
 }
 
 fetch(url, {
@@ -204,6 +204,50 @@ fetch(url, {
 
 
 <!-- END_d07533fb356c1cce453f36f78e88d563 -->
+
+#Comments
+
+
+APIs for managing comments
+<!-- START_96f948918a2fdce8e599741680346e3d -->
+## Deletion
+deletes a Comment by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost:8000/comment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/comment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE comment/{comment}`
+
+
+<!-- END_96f948918a2fdce8e599741680346e3d -->
 
 #Friendships
 
@@ -542,7 +586,7 @@ curl -X POST \
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"dolore","media":"commodi"}'
+    -d '{"text":"voluptatem","media":"modi"}'
 
 ```
 
@@ -557,8 +601,8 @@ let headers = {
 };
 
 let body = {
-    "text": "dolore",
-    "media": "commodi"
+    "text": "voluptatem",
+    "media": "modi"
 }
 
 fetch(url, {
@@ -622,29 +666,23 @@ fetch(url, {
 
 <!-- END_c3dbf7298ec1d346dbd413512ecf72a8 -->
 
-#User
-
-
-APIs for managing user
-<!-- START_5c5bb7a3528795d09ae9c636f86415fb -->
-## Suggestions
-user suggestions given a part of the name
+<!-- START_28879fe61d51a12419cf43f57cefa40c -->
+## Deletion
+deletes a user by id
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X GET \
-    -G "http://localhost:8000/suggestions" \
+curl -X DELETE \
+    "http://localhost:8000/post/1" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"name":"laboriosam"}'
-
+    -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost:8000/suggestions"
+    "http://localhost:8000/post/1"
 );
 
 let headers = {
@@ -652,14 +690,9 @@ let headers = {
     "Accept": "application/json",
 };
 
-let body = {
-    "name": "laboriosam"
-}
-
 fetch(url, {
-    method: "GET",
+    method: "DELETE",
     headers: headers,
-    body: body
 })
     .then(response => response.json())
     .then(json => console.log(json));
@@ -668,15 +701,15 @@ fetch(url, {
 
 
 ### HTTP Request
-`GET suggestions`
+`DELETE post/{post}`
 
-#### Body Parameters
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    `name` | string |  required  | the name to search for
-    
-<!-- END_5c5bb7a3528795d09ae9c636f86415fb -->
 
+<!-- END_28879fe61d51a12419cf43f57cefa40c -->
+
+#User
+
+
+APIs for managing user
 <!-- START_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
 ## Show all user with posts
 ADMIN ONLY
@@ -716,6 +749,189 @@ fetch(url, {
 
 
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
+
+<!-- START_c3f689a804341d95e136d0131312e64f -->
+## Deletion
+deletes a user by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost:8000/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE user/{user}`
+
+
+<!-- END_c3f689a804341d95e136d0131312e64f -->
+
+<!-- START_8de0eef03624ee766aa467538721f96b -->
+## Update Geo Position
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST \
+    "http://localhost:8000/updateGeo" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"lat":"ex","lng":"sed"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/updateGeo"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "lat": "ex",
+    "lng": "sed"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`POST updateGeo`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `lat` | string |  required  | the Latitude
+        `lng` | string |  required  | the Longitude
+    
+<!-- END_8de0eef03624ee766aa467538721f96b -->
+
+<!-- START_7918d9f1ab4b0bdb25a75473dca51c27 -->
+## Get user Info
+returns the specified user
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost:8000/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET user/{user}`
+
+
+<!-- END_7918d9f1ab4b0bdb25a75473dca51c27 -->
+
+<!-- START_5c5bb7a3528795d09ae9c636f86415fb -->
+## Suggestions
+user suggestions given a part of the name
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://localhost:8000/suggestions" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"ea"}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/suggestions"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "ea"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`GET suggestions`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `name` | string |  required  | the name to search for
+    
+<!-- END_5c5bb7a3528795d09ae9c636f86415fb -->
 
 #general
 
@@ -808,7 +1024,7 @@ curl -X POST \
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"aut","password":"et","email":"explicabo"}'
+    -d '{"Token":"est","password":"porro","email":"qui"}'
 
 ```
 
@@ -823,9 +1039,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "aut",
-    "password": "et",
-    "email": "explicabo"
+    "Token": "est",
+    "password": "porro",
+    "email": "qui"
 }
 
 fetch(url, {
@@ -861,7 +1077,7 @@ curl -X POST \
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"non"}'
+    -d '{"email":"ad"}'
 
 ```
 
@@ -876,7 +1092,7 @@ let headers = {
 };
 
 let body = {
-    "email": "non"
+    "email": "ad"
 }
 
 fetch(url, {
