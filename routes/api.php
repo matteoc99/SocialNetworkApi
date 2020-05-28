@@ -32,7 +32,7 @@ Route::group(['middleware'=>['auth']],function (){
     //TODO unsecure route, shuold be admin only
     Route::get('/user', 'UserController@index');
 
-   // Route::delete('/user/{user}', 'UserController@destroy');
+    Route::delete('/user/{user}', 'UserController@destroy');
     Route::post('/updateGeo', 'UserController@changeLoc');
     Route::get('/user/{user}', 'UserController@show');
 

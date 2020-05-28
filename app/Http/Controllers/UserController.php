@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Http\Resources\UserLocationResource;
 use App\Http\Resources\UserLocationResourceCollection;
 use App\User;
@@ -97,11 +98,6 @@ class UserController extends Controller
     {
 
         if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
-            $user->myFriendships()->delete();
-            $user->friendshipsWithMe()->delete();
-            $user->posts()->with("comments")->delete();
-            $user->posts()->delete();
-
             $user->delete();
             return response("", 200);
         }

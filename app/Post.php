@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
-    protected $dispatchesEvents = [
-        'deleting' => \App\Listeners\PostDeleting::class,
-    ];
+
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -26,6 +24,17 @@ class Post extends Model
     {
         return $this->belongsToMany('App\User',"post_like","user_id","post_id")
             ->using('App\PostLike')->withPivot("liked");
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($post) {
+            foreach ($post->comments as $comments) {
+                $comments->delete();
+            }
+            $post->likes()->delete();
+        });
     }
 
 }

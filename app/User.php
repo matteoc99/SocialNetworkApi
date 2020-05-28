@@ -80,7 +80,10 @@ class User extends Authenticable implements JWTSubject
     }
 
     public function chats(){
-        return $this->belongsToMany('App\Chat')->using('App\ChatParticipant');
+        return $this->belongsToMany('App\Chat',"chat_participant","chat_id","user_id");
+    }
+    public function messages(){
+        return $this->hasMany('App\Message');
     }
 
 
@@ -95,5 +98,25 @@ class User extends Authenticable implements JWTSubject
             "name"=>$this->name,
             "role"=>$this->role,
             ];
+    }
+
+
+
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) { // before delete() method call this
+            foreach ($user->posts as $post) {
+                $post->delete();
+            }
+            foreach ($user->chats as $chat) {
+                $chat->delete();
+            }
+            $user->myFriendships()->delete();
+            $user->friendshipsWithMe()->delete();
+            $user->myNotifications()->delete();
+            $user->messages()->delete();
+        });
     }
 }

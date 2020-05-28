@@ -30,5 +30,13 @@ class Comment extends Model
             ->using('App\CommentLike')->withPivot("liked");
     }
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($comment) {
+            $comment->likes()->delete();
+            $comment->replies()->delete();
+        });
+    }
 
 }

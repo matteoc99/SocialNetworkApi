@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'name' => "Matteo",
             'email' => "matteo.cosi@live.it",
             'password' => bcrypt("1234"),
+            'role_id' => 3,
         ]);
     }
 }
