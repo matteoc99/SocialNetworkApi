@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PostLike extends Pivot
 {
-    //
+    protected $primaryKey = ['user_id','post_id'];
+
 }

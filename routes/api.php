@@ -61,6 +61,10 @@ Route::group(['middleware'=>['auth']],function (){
     Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
     Route::delete('/comment/{comment}', 'CommentController@destroy');
 
+    Route::post('/likePost/{post}', 'LikeController@likePost');
+    Route::post('/likeComment/{comment}', 'LikeController@likeComment');
+    Route::post('/dislikePost/{post}', 'LikeController@dislikePost');
+    Route::post('/dislikeComment/{comment}', 'LikeController@dislikeComment');
 
 
     /**

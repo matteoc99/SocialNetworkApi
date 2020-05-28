@@ -26,8 +26,8 @@ class Comment extends Model
 
     public function likes()
     {
-        return $this->belongsToMany('App\User',"comment_like","user_id","comment_id")
-            ->using('App\CommentLike')->withPivot("liked");
+        return $this->belongsToMany('App\User',"comment_like")->withPivot("liked");
+
     }
 
     public static function boot() {

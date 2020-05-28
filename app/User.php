@@ -78,6 +78,17 @@ class User extends Authenticable implements JWTSubject
 
         return $this->hasMany('App\Post');
     }
+    public function postLikes()
+    {
+        return $this->belongsToMany('App\Post',"post_like")->withPivot("liked");
+
+    }
+    public function commentLikes()
+    {
+        return $this->belongsToMany('App\Comment',"comment_like")->withPivot("liked");
+
+    }
+
 
     public function chats(){
         return $this->belongsToMany('App\Chat',"chat_participant","chat_id","user_id");
