@@ -32,10 +32,10 @@ Route::group(['middleware'=>['auth']],function (){
     //TODO unsecure route, shuold be admin only
     Route::get('/user', 'UserController@index');
 
-    Route::delete('/user/{user}', 'UserController@destroy');
     Route::post('/updateGeo', 'UserController@changeLoc');
     Route::get('/user/{user}', 'UserController@show');
     Route::put('/user/{user}', 'UserController@update');
+    Route::delete('/user/{user}', 'UserController@destroy');
 
 
     Route::get('/refresh','Auth\LoginController@refresh');
@@ -54,6 +54,7 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/postfeed', 'PostController@postfeed');
     Route::get('/posts/{user}', 'PostController@postOfUser');
     Route::delete('/post/{post}', 'PostController@destroy');
+    Route::put('/post/{post}', 'PostController@update');
 
 
     Route::get('/comments', 'CommentController@index');
