@@ -70,6 +70,7 @@ class CommentController extends Controller
 
     /**
      * Comments of Post
+     * edit existing comment
      * @authenticated
      * @bodyParam text string required The content of the comment
      */
@@ -79,15 +80,23 @@ class CommentController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * update a Comment
+     * @authenticated
+     * @bodyParam text string required The NEW content of the comment
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        if ($this->authUser()->id == $comment->user->id || $this->authUser()->isEditor) {
+
+            $request->validate([
+                "text" => "required",
+            ]);
+            $comment->content = $request->get("text");
+            $comment->save();
+            return response($comment, 200);
+        }
+        return response("",401);
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Resources\UserLocationResourceCollection;
 use App\User;
 use Faker\Provider\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * @group User
@@ -74,7 +75,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if($user == null)
+        if ($user == null)
             return response("", 404);
         if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
             return response($user, 200);
@@ -83,10 +84,52 @@ class UserController extends Controller
         return response("", 401);
     }
 
+    /**
+     * Update a User
+     * @authenticated
+     * Change user settings
+     *
+     * @bodyParam name string required name of the user
+     * @bodyParam email string required email of the user
+     * @bodyParam post_visibility integer required 0->private  1 -> friends  2->all (Not implemented jet)
+     * @bodyParam show_location boolean required show or don't show location on map
+     * @bodyParam profile_image file the profile picture
+     */
     public function update(Request $request, User $user)
     {
+        if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
 
+            $request->validate([
+                "name" => "required",
+                "email" => "required|email",
+                "post_visibility" => "required",
+                "show_location" => "required",
+            ]);
 
+            $user->name = $request->get("name");
+            $user->email = $request->get("email");
+            $user->post_visibility = $request->get("post_visibility");
+            $user->show_location = $request->get("show_location");
+
+            if ($request->hasFile("profile_image")) {
+                $file = $request->file("profile_image");
+
+                $uuid = Str::uuid()->toString();
+                $file->move(base_path("/queue"), $uuid);
+
+                $mime = mime_content_type(base_path("/queue/") . $uuid);
+
+                if (!(strstr($mime, "image/"))) {
+                    unlink(base_path("/queue/") . $uuid);
+                    $uuid = null;
+                }
+            }
+            $user->profile_image = $uuid;
+            $user->save();
+
+            return response("", 200);
+        }
+        return response("", 401);
     }
 
     /**

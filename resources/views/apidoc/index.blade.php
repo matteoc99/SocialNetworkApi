@@ -58,7 +58,7 @@
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"itaque","password":"est"}'
+    -d '{"email":"qui","password":"sapiente"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/login"
@@ -70,8 +70,8 @@ let headers = {
 };
 
 let body = {
-    "email": "itaque",
-    "password": "est"
+    "email": "qui",
+    "password": "sapiente"
 }
 
 fetch(url, {
@@ -144,7 +144,7 @@ fetch(url, {
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"nam","email":"maxime","password":"voluptates"}'
+    -d '{"name":"beatae","email":"sed","password":"error"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/register"
@@ -156,9 +156,9 @@ let headers = {
 };
 
 let body = {
-    "name": "nam",
-    "email": "maxime",
-    "password": "voluptates"
+    "name": "beatae",
+    "email": "sed",
+    "password": "error"
 }
 
 fetch(url, {
@@ -268,7 +268,7 @@ fetch(url, {
     -G "http://localhost:8000/comments/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"dicta"}'
+    -d '{"text":"est"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/comments/1"
@@ -280,7 +280,7 @@ let headers = {
 };
 
 let body = {
-    "text": "dicta"
+    "text": "est"
 }
 
 fetch(url, {
@@ -322,7 +322,7 @@ fetch(url, {
     "http://localhost:8000/comment/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"impedit"}'
+    -d '{"text":"eligendi"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/comment/1"
@@ -334,7 +334,7 @@ let headers = {
 };
 
 let body = {
-    "text": "impedit"
+    "text": "eligendi"
 }
 
 fetch(url, {
@@ -377,7 +377,7 @@ used to store a response to another comment</p>
     "http://localhost:8000/comment/1/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"neque"}'
+    -d '{"text":"accusantium"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/comment/1/1"
@@ -389,7 +389,7 @@ let headers = {
 };
 
 let body = {
-    "text": "neque"
+    "text": "accusantium"
 }
 
 fetch(url, {
@@ -421,6 +421,60 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_3b99fcc718600046560c8d70d914ca0e -->
+<!-- START_0fb0e30f655ed96f32085e6a533fcf07 -->
+<h2>Edit Comment</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost:8000/comment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"voluptas"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/comment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "voluptas"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT comment/{comment}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>string</td>
+<td>required</td>
+<td>The NEW content of the comment</td>
+</tr>
+</tbody>
+</table>
+<!-- END_0fb0e30f655ed96f32085e6a533fcf07 -->
 <!-- START_96f948918a2fdce8e599741680346e3d -->
 <h2>Deletion</h2>
 <p>deletes a Comment by id</p>
@@ -650,6 +704,124 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST acceptFriend/{friend}</code></p>
 <!-- END_d90a73fd4894e0a9fe3c486268594f8a -->
+<h1>Likes</h1>
+<p>APIs for managing likes</p>
+<!-- START_b12eb4d8d22965195bd411a99d3b5352 -->
+<h2>Like Post</h2>
+<p>likes a post by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/likePost/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/likePost/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST likePost/{post}</code></p>
+<!-- END_b12eb4d8d22965195bd411a99d3b5352 -->
+<!-- START_efefbbee464a758d2f8fc581da574d47 -->
+<h2>Like Comment</h2>
+<p>likes a comment by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/likeComment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/likeComment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST likeComment/{comment}</code></p>
+<!-- END_efefbbee464a758d2f8fc581da574d47 -->
+<!-- START_be19b855c59a3739698526e1d395ce28 -->
+<h2>Dislike Post</h2>
+<p>dislikes a post by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/dislikePost/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/dislikePost/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST dislikePost/{post}</code></p>
+<!-- END_be19b855c59a3739698526e1d395ce28 -->
+<!-- START_c6f68092a046cc8102f07163256ac7da -->
+<h2>Dislike Comment</h2>
+<p>dislikes a comment by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/dislikeComment/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/dislikeComment/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST dislikeComment/{comment}</code></p>
+<!-- END_c6f68092a046cc8102f07163256ac7da -->
 <h1>Posts</h1>
 <p>APIs for managing posts</p>
 <!-- START_b50fbd1dc666341a0aba5436344a60d9 -->
@@ -695,7 +867,7 @@ fetch(url, {
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"hic","media":"accusamus"}'
+    -d '{"text":"ut","media":"qui"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/post"
@@ -707,8 +879,8 @@ let headers = {
 };
 
 let body = {
-    "text": "hic",
-    "media": "accusamus"
+    "text": "ut",
+    "media": "qui"
 }
 
 fetch(url, {
@@ -864,6 +1036,35 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET user</code></p>
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
+<!-- START_c3f689a804341d95e136d0131312e64f -->
+<h2>Deletion</h2>
+<p>deletes a user by id</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE \
+    "http://localhost:8000/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE user/{user}</code></p>
+<!-- END_c3f689a804341d95e136d0131312e64f -->
 <!-- START_8de0eef03624ee766aa467538721f96b -->
 <h2>Update Geo Position</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
@@ -874,7 +1075,7 @@ fetch(url, {
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"hic","lng":"et"}'
+    -d '{"lat":"eos","lng":"animi"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/updateGeo"
@@ -886,8 +1087,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "hic",
-    "lng": "et"
+    "lat": "eos",
+    "lng": "animi"
 }
 
 fetch(url, {
@@ -954,6 +1155,91 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET user/{user}</code></p>
 <!-- END_7918d9f1ab4b0bdb25a75473dca51c27 -->
+<!-- START_1cde2a12e7c3177af48fd9c0bfb79684 -->
+<h2>Update</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Change user settings</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT \
+    "http://localhost:8000/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"name":"alias","email":"provident","post_visibility":13,"show_location":true,"profile_image":"illo"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "alias",
+    "email": "provident",
+    "post_visibility": 13,
+    "show_location": true,
+    "profile_image": "illo"
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT user/{user}</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>required</td>
+<td>name of the user</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+<td>email of the user</td>
+</tr>
+<tr>
+<td><code>post_visibility</code></td>
+<td>integer</td>
+<td>required</td>
+<td>0-&gt;private</td>
+<td>1 -&gt; friends</td>
+<td>2-&gt;all (Not implemented jet)</td>
+</tr>
+<tr>
+<td><code>show_location</code></td>
+<td>boolean</td>
+<td>required</td>
+<td>show or don't show location on map</td>
+</tr>
+<tr>
+<td><code>profile_image</code></td>
+<td>file</td>
+<td>optional</td>
+<td>the profile picture as an image</td>
+</tr>
+</tbody>
+</table>
+<!-- END_1cde2a12e7c3177af48fd9c0bfb79684 -->
 <!-- START_5c5bb7a3528795d09ae9c636f86415fb -->
 <h2>Suggestions</h2>
 <p>user suggestions given a part of the name</p>
@@ -965,7 +1251,7 @@ fetch(url, {
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"sit"}'
+    -d '{"name":"accusamus"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/suggestions"
@@ -977,7 +1263,7 @@ let headers = {
 };
 
 let body = {
-    "name": "sit"
+    "name": "accusamus"
 }
 
 fetch(url, {
@@ -1075,7 +1361,7 @@ fetch(url, {
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"facere","password":"perspiciatis","email":"eos"}'
+    -d '{"Token":"quia","password":"voluptas","email":"sit"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset"
@@ -1087,9 +1373,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "facere",
-    "password": "perspiciatis",
-    "email": "eos"
+    "Token": "quia",
+    "password": "voluptas",
+    "email": "sit"
 }
 
 fetch(url, {
@@ -1142,7 +1428,7 @@ fetch(url, {
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"qui"}'
+    -d '{"email":"omnis"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/reset/create"
@@ -1154,7 +1440,7 @@ let headers = {
 };
 
 let body = {
-    "email": "qui"
+    "email": "omnis"
 }
 
 fetch(url, {

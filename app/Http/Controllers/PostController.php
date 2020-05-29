@@ -50,7 +50,7 @@ class PostController extends Controller
      * Store a new post
      * @authenticated
      * @bodyParam text string required The content of the post
-     * @bodyParam media image The media-file of the post
+     * @bodyParam media file The media-file of the post
      */
 
     public function store(Request $request)
@@ -105,12 +105,60 @@ class PostController extends Controller
         $posts = $user->posts;
         if ($this->authUser()->id != $user->id)
             $posts = $posts->where("post_visibility", ">", 0);
-        return  array_values($posts->toArray());
+        return array_values($posts->toArray());
     }
 
+    /**
+     *
+     * Update a post
+     * @authenticated
+     * @bodyParam text string required The NEW content of the post
+     * @bodyParam media_uuid string the uuid if the user wants to keep the image. leave it out if the image has to be deleted
+     * @bodyParam media file The media-file of the post, if the image has to be changed
+     * @bodyParam post_visibility integer 0->private  1 -> friends(default)  2->all (Not implemented jet)
+     */
     public function update(Request $request, Post $post)
     {
-        //
+        if ($this->authUser()->id == $post->user->id || $this->authUser()->isEditor) {
+
+            $request->validate([
+                "text" => "required",
+            ]);
+
+            $posttype = 0;
+            $uuid = null;
+
+            if ($request->hasFile("media")) {
+                $file = $request->file("media");
+
+
+                $uuid = Str::uuid()->toString();
+                $file->move(base_path("/queue"), $uuid);
+
+                $mime = mime_content_type(base_path("/queue/") . $uuid);
+
+                if (strstr($mime, "video/")) {
+                    $posttype = 2;
+                } else if (strstr($mime, "image/")) {
+                    $posttype = 1;
+                } else {
+                    unlink(base_path("/queue/") . $uuid);
+                    $uuid = null;
+                }
+            }
+
+            if (!$request->exists("media_uuid")) {
+                $post->uuid = $uuid;
+                $post->post_type = $posttype;
+            }
+            $post->text = $request->get("text");
+            if ($request->exists("post_visibility")) {
+                $post->post_visibility = $request->get("post_visibility");
+            }
+            $post->save();
+            return response("", 200);
+        }
+        return response("", 401);
     }
 
     /**
