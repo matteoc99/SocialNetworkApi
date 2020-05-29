@@ -111,10 +111,10 @@ class PostController extends Controller
     /**
      *
      * Update a post
+     *
      * @authenticated
      * @bodyParam text string required The NEW content of the post
-     * @bodyParam media_uuid string the uuid if the user wants to keep the image. leave it out if the image has to be deleted
-     * @bodyParam media file The media-file of the post, if the image has to be changed
+     * @bodyParam media file The media-file of the post, if the image has to be changed. leave empty to delete. leave it out to leave the image unchanged
      * @bodyParam post_visibility integer 0->private  1 -> friends(default)  2->all (Not implemented jet)
      */
     public function update(Request $request, Post $post)
@@ -126,29 +126,32 @@ class PostController extends Controller
             ]);
 
             $posttype = 0;
-            $uuid = null;
+            $uuid = $post->media_uuid;
 
-            if ($request->hasFile("media")) {
-                $file = $request->file("media");
+            if ($request->exists("media")) {
+                if ($request->hasFile("media")) {
+                    $file = $request->file("media");
 
+                    $uuid = Str::uuid()->toString();
+                    $file->move(base_path("/queue"), $uuid);
 
-                $uuid = Str::uuid()->toString();
-                $file->move(base_path("/queue"), $uuid);
+                    $mime = mime_content_type(base_path("/queue/") . $uuid);
 
-                $mime = mime_content_type(base_path("/queue/") . $uuid);
-
-                if (strstr($mime, "video/")) {
-                    $posttype = 2;
-                } else if (strstr($mime, "image/")) {
-                    $posttype = 1;
-                } else {
-                    unlink(base_path("/queue/") . $uuid);
+                    if (strstr($mime, "video/")) {
+                        $posttype = 2;
+                    } else if (strstr($mime, "image/")) {
+                        $posttype = 1;
+                    } else {
+                        unlink(base_path("/queue/") . $uuid);
+                        $uuid = null;
+                    }
+                }else{
                     $uuid = null;
                 }
             }
 
-            if (!$request->exists("media_uuid")) {
-                $post->uuid = $uuid;
+            if ($post->media_uuid != $uuid) {
+                $post->media_uuid = $uuid;
                 $post->post_type = $posttype;
             }
             $post->text = $request->get("text");

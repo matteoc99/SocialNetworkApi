@@ -33,7 +33,7 @@ curl -X POST \
     "http://localhost:8000/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"qui","password":"sapiente"}'
+    -d '{"email":"nesciunt","password":"maiores"}'
 
 ```
 
@@ -48,8 +48,8 @@ let headers = {
 };
 
 let body = {
-    "email": "qui",
-    "password": "sapiente"
+    "email": "nesciunt",
+    "password": "maiores"
 }
 
 fetch(url, {
@@ -123,7 +123,7 @@ curl -X POST \
     "http://localhost:8000/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"beatae","email":"sed","password":"error"}'
+    -d '{"name":"nesciunt","email":"aliquid","password":"perferendis"}'
 
 ```
 
@@ -138,9 +138,9 @@ let headers = {
 };
 
 let body = {
-    "name": "beatae",
-    "email": "sed",
-    "password": "error"
+    "name": "nesciunt",
+    "email": "aliquid",
+    "password": "perferendis"
 }
 
 fetch(url, {
@@ -251,6 +251,7 @@ fetch(url, {
 
 <!-- START_56e2420b314458eadaf3096d82dbb1b2 -->
 ## Comments of Post
+edit existing comment
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -260,7 +261,7 @@ curl -X GET \
     -G "http://localhost:8000/comments/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"est"}'
+    -d '{"text":"neque"}'
 
 ```
 
@@ -275,7 +276,7 @@ let headers = {
 };
 
 let body = {
-    "text": "est"
+    "text": "neque"
 }
 
 fetch(url, {
@@ -310,7 +311,7 @@ curl -X POST \
     "http://localhost:8000/comment/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"eligendi"}'
+    -d '{"text":"voluptas"}'
 
 ```
 
@@ -325,7 +326,7 @@ let headers = {
 };
 
 let body = {
-    "text": "eligendi"
+    "text": "voluptas"
 }
 
 fetch(url, {
@@ -362,7 +363,7 @@ curl -X POST \
     "http://localhost:8000/comment/1/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"accusantium"}'
+    -d '{"text":"rem"}'
 
 ```
 
@@ -377,7 +378,7 @@ let headers = {
 };
 
 let body = {
-    "text": "accusantium"
+    "text": "rem"
 }
 
 fetch(url, {
@@ -402,7 +403,7 @@ Parameter | Type | Status | Description
 <!-- END_3b99fcc718600046560c8d70d914ca0e -->
 
 <!-- START_0fb0e30f655ed96f32085e6a533fcf07 -->
-## Edit Comment
+## update a Comment
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -412,7 +413,7 @@ curl -X PUT \
     "http://localhost:8000/comment/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"voluptas"}'
+    -d '{"text":"minus"}'
 
 ```
 
@@ -427,7 +428,7 @@ let headers = {
 };
 
 let body = {
-    "text": "voluptas"
+    "text": "minus"
 }
 
 fetch(url, {
@@ -994,7 +995,7 @@ curl -X POST \
     "http://localhost:8000/post" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"text":"ut","media":"qui"}'
+    -d '{"text":"qui","media":"exercitationem"}'
 
 ```
 
@@ -1009,8 +1010,8 @@ let headers = {
 };
 
 let body = {
-    "text": "ut",
-    "media": "qui"
+    "text": "qui",
+    "media": "exercitationem"
 }
 
 fetch(url, {
@@ -1031,7 +1032,7 @@ fetch(url, {
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `text` | string |  required  | The content of the post
-        `media` | image |  optional  | The media-file of the post
+        `media` | file |  optional  | The media-file of the post
     
 <!-- END_6bb34778bbf4ff8243bcb491022de63a -->
 
@@ -1156,6 +1157,62 @@ fetch(url, {
 
 <!-- END_28879fe61d51a12419cf43f57cefa40c -->
 
+<!-- START_377e2fce65bf74705cfad3cc0c4ce6b4 -->
+## Update a post
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X PUT \
+    "http://localhost:8000/post/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"text":"repellendus","media_uuid":"vel","media":"deleniti","post_visibility":10}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/post/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "text": "repellendus",
+    "media_uuid": "vel",
+    "media": "deleniti",
+    "post_visibility": 10
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`PUT post/{post}`
+
+#### Body Parameters
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    `text` | string |  required  | The NEW content of the post
+        `media_uuid` | string |  optional  | the uuid if the user wants to keep the image. leave it out if the image has to be deleted
+        `media` | file |  optional  | The media-file of the post, if the image has to be changed
+        `post_visibility` | integer |  optional  | 0->private  1 -> friends(default)  2->all (Not implemented jet)
+    
+<!-- END_377e2fce65bf74705cfad3cc0c4ce6b4 -->
+
 #User
 
 
@@ -1200,46 +1257,6 @@ fetch(url, {
 
 <!-- END_3bcedda78ae45ef5c0f4c97a4963b7a1 -->
 
-<!-- START_c3f689a804341d95e136d0131312e64f -->
-## Deletion
-deletes a user by id
-
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X DELETE \
-    "http://localhost:8000/user/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost:8000/user/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-
-### HTTP Request
-`DELETE user/{user}`
-
-
-<!-- END_c3f689a804341d95e136d0131312e64f -->
-
 <!-- START_8de0eef03624ee766aa467538721f96b -->
 ## Update Geo Position
 
@@ -1251,7 +1268,7 @@ curl -X POST \
     "http://localhost:8000/updateGeo" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"lat":"eos","lng":"animi"}'
+    -d '{"lat":"non","lng":"iste"}'
 
 ```
 
@@ -1266,8 +1283,8 @@ let headers = {
 };
 
 let body = {
-    "lat": "eos",
-    "lng": "animi"
+    "lat": "non",
+    "lng": "iste"
 }
 
 fetch(url, {
@@ -1333,11 +1350,9 @@ fetch(url, {
 <!-- END_7918d9f1ab4b0bdb25a75473dca51c27 -->
 
 <!-- START_1cde2a12e7c3177af48fd9c0bfb79684 -->
-## Update
+## Update a User
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Change user settings
-
 > Example request:
 
 ```bash
@@ -1345,7 +1360,7 @@ curl -X PUT \
     "http://localhost:8000/user/1" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"alias","email":"provident","post_visibility":13,"show_location":true,"profile_image":"illo"}'
+    -d '{"name":"sapiente","email":"voluptas","post_visibility":3,"show_location":false,"profile_image":"quis"}'
 
 ```
 
@@ -1360,11 +1375,11 @@ let headers = {
 };
 
 let body = {
-    "name": "alias",
-    "email": "provident",
-    "post_visibility": 13,
-    "show_location": true,
-    "profile_image": "illo"
+    "name": "sapiente",
+    "email": "voluptas",
+    "post_visibility": 3,
+    "show_location": false,
+    "profile_image": "quis"
 }
 
 fetch(url, {
@@ -1386,11 +1401,51 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `name` | string |  required  | name of the user
         `email` | string |  required  | email of the user
-        `post_visibility` | integer |  required  | 0->private | 1 -> friends | 2->all (Not implemented jet)
+        `post_visibility` | integer |  required  | 0->private  1 -> friends  2->all (Not implemented jet)
         `show_location` | boolean |  required  | show or don't show location on map
-        `profile_image` | file |  optional  | the profile picture as an image
+        `profile_image` | file |  optional  | the profile picture
     
 <!-- END_1cde2a12e7c3177af48fd9c0bfb79684 -->
+
+<!-- START_c3f689a804341d95e136d0131312e64f -->
+## Deletion
+deletes a user by id
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X DELETE \
+    "http://localhost:8000/user/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"
+```
+
+```javascript
+const url = new URL(
+    "http://localhost:8000/user/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+
+### HTTP Request
+`DELETE user/{user}`
+
+
+<!-- END_c3f689a804341d95e136d0131312e64f -->
 
 <!-- START_5c5bb7a3528795d09ae9c636f86415fb -->
 ## Suggestions
@@ -1404,7 +1459,7 @@ curl -X GET \
     -G "http://localhost:8000/suggestions" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"name":"accusamus"}'
+    -d '{"name":"quia"}'
 
 ```
 
@@ -1419,7 +1474,7 @@ let headers = {
 };
 
 let body = {
-    "name": "accusamus"
+    "name": "quia"
 }
 
 fetch(url, {
@@ -1534,7 +1589,7 @@ curl -X POST \
     "http://localhost:8000/reset" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"Token":"quia","password":"voluptas","email":"sit"}'
+    -d '{"Token":"aut","password":"deserunt","email":"est"}'
 
 ```
 
@@ -1549,9 +1604,9 @@ let headers = {
 };
 
 let body = {
-    "Token": "quia",
-    "password": "voluptas",
-    "email": "sit"
+    "Token": "aut",
+    "password": "deserunt",
+    "email": "est"
 }
 
 fetch(url, {
@@ -1587,7 +1642,7 @@ curl -X POST \
     "http://localhost:8000/reset/create" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"omnis"}'
+    -d '{"email":"adipisci"}'
 
 ```
 
@@ -1602,7 +1657,7 @@ let headers = {
 };
 
 let body = {
-    "email": "omnis"
+    "email": "adipisci"
 }
 
 fetch(url, {

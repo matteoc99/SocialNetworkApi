@@ -106,6 +106,8 @@ class UserController extends Controller
                 "show_location" => "required",
             ]);
 
+            $uuid = null;
+
             $user->name = $request->get("name");
             $user->email = $request->get("email");
             $user->post_visibility = $request->get("post_visibility");

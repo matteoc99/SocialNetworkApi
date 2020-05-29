@@ -34,7 +34,7 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::post('/updateGeo', 'UserController@changeLoc');
     Route::get('/user/{user}', 'UserController@show');
-    Route::put('/user/{user}', 'UserController@update');
+    Route::post('/user/update/{user}', 'UserController@update');
     Route::delete('/user/{user}', 'UserController@destroy');
 
 
@@ -54,14 +54,14 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/postfeed', 'PostController@postfeed');
     Route::get('/posts/{user}', 'PostController@postOfUser');
     Route::delete('/post/{post}', 'PostController@destroy');
-    Route::put('/post/{post}', 'PostController@update');
+    Route::post('/post/update/{post}', 'PostController@update');
 
 
     Route::get('/comments', 'CommentController@index');
+    Route::post('/comment/update/{comment}', 'CommentController@update');
     Route::get('/comments/{post}', 'CommentController@commentsOfPost');
     Route::post('/comment/{post}', 'CommentController@store');
     Route::post('/comment/{post}/{comment}', 'CommentController@storeNested');
-    Route::put('/comment/{comment}', 'CommentController@update');
     Route::delete('/comment/{comment}', 'CommentController@destroy');
 
     Route::post('/likePost/{post}', 'LikeController@likePost');
