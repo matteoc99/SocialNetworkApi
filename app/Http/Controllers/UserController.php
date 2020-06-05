@@ -77,11 +77,7 @@ class UserController extends Controller
     {
         if ($user == null)
             return response("", 404);
-        if ($this->authUser()->id == $user->id || $this->authUser()->isEditor) {
-            return response($user, 200);
-
-        }
-        return response("unauthorized", 401);
+        return response($user, 200);
     }
 
     /**
