@@ -50,6 +50,8 @@ class FriendshipController extends Controller
     /**
      * Unaccepted Friend Requests
      * Friend Requests by other user towards me
+     * TO BE USED AS NOTIFICATION
+     *
      * @authenticated
      */
     public function friendrequests()
