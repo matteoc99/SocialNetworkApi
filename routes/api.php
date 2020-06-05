@@ -49,6 +49,8 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('/pendingfriendrequests', 'FriendshipController@pendingfriendrequests');
     Route::post('/acceptFriend/{friend}', 'FriendshipController@acceptFriend');
 
+    //automatic accept on mutual request
+
     Route::get('/posts', 'PostController@index');
     Route::post('/post', 'PostController@store');
     Route::get('/postfeed', 'PostController@postfeed');

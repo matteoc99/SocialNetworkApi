@@ -46,7 +46,7 @@ class UserController extends Controller
         $this->authUser()->lat = $request->get("lat");
         $this->authUser()->lng = $request->get("lng");
         $this->authUser()->save();
-        return response("", 200);
+        return response("ok", 200);
 
     }
 
@@ -81,7 +81,7 @@ class UserController extends Controller
             return response($user, 200);
 
         }
-        return response("", 401);
+        return response("unauthorized", 401);
     }
 
     /**

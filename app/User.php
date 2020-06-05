@@ -22,6 +22,7 @@ class User extends Authenticable implements JWTSubject
         'email_verified_at' => 'datetime',
         'isAdmin' => 'boolean',
         'isEditor' => 'boolean',
+        'show_location' => 'boolean',
     ];
 
     public function role(){
@@ -107,6 +108,7 @@ class User extends Authenticable implements JWTSubject
     {
         return [
             "name"=>$this->name,
+            "show_location "=>$this->show_location,
             "role"=>$this->role,
             ];
     }
