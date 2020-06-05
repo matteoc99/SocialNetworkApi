@@ -109,6 +109,8 @@ class User extends Authenticable implements JWTSubject
         return [
             "name"=>$this->name,
             "show_location "=>$this->show_location,
+            "lat "=>$this->lat,
+            "lng "=>$this->lng,
             "role"=>$this->role,
             ];
     }
