@@ -59,7 +59,7 @@ class UserController extends Controller
     public function suggestions(Request $request)
     {
         $request->validate([
-            "name" => "required|min:3",
+            "name" => "required",
         ]);
 
         return User::where("name", "like", '%' . $request->get("name") . '%')
