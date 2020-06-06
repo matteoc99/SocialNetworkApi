@@ -125,9 +125,9 @@ class UserController extends Controller
             $user->profile_image = $uuid;
             $user->save();
 
-            return response("", 200);
+            return response($user, 200);
         }
-        return response("", 401);
+        return response("unauthorized", 401);
     }
 
     /**
