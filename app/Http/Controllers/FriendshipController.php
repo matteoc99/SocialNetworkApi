@@ -70,18 +70,31 @@ class FriendshipController extends Controller
 
     /**
      * Send a Friend Request
+     * automatically accepts the friend request if the Friend has also requested friendship
      * @authenticated
      */
     public function requestFriend($friend)
     {
-        $friendship = new Friendship();
-        $friendship->status = 0;
-        $friendship->user_1_id = $this->authUser()->id;
-        $friendship->user_2_id = $friend;
+        $mutualRequest = Friendship::where("user_1_id","=",$friend)->first();
+        if (!$mutualRequest) {
+            $alreadyRequested = Friendship::where("user_1_id","=",$this->authUser()->id)->first();
+            if (!$alreadyRequested) {
 
-        $friendship->save();
+                $friendship = new Friendship();
+                $friendship->status = 0;
+                $friendship->user_1_id = $this->authUser()->id;
+                $friendship->user_2_id = $friend;
+                $friendship->save();
+                return response("friendship issued",200);
 
-        return response("",200);
+            }else{
+                return response("already requested",200);
+            }
+        }else{
+            $mutualRequest->status =1;
+            $mutualRequest->save();
+            return response("mutual friendship accepted",200);
+        }
     }
     /**
      * Accept a FriendRequest
