@@ -9,6 +9,7 @@ Route::get('/',function (){
     return "<div style='width: 100%;text-align: center'>
                 <h1>Nothing to see here, API only</h1>
                 <a href='/doc'>API - documentation</a>
+                <a href='https://retronet.social'>Fronted</a>
             </div>";
 });
 Route::get('/doc',"Web\DocController@doc");
@@ -24,6 +25,10 @@ Route::post('/register','Auth\LoginController@register');
 //password reset, without auth
 Route::post('/reset', 'Auth\PasswordResetController@reset');
 Route::post('/reset/create', 'Auth\PasswordResetController@create');
+
+
+//constants lookup
+Route::get('/constants', 'ConstantController@index');
 
 
 Route::group(['middleware'=>['auth']],function (){
