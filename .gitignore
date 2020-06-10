@@ -117,4 +117,5 @@ fabric.properties
 
 # Retronet
 queue/*
-resources/
+resources/docs/
+resources/views/
