@@ -76,6 +76,8 @@ Route::group(['middleware'=>['auth']],function (){
     Route::post('/dislikePost/{post}', 'LikeController@dislikePost');
     Route::post('/dislikeComment/{comment}', 'LikeController@dislikeComment');
 
+	// Push notifications
+	Route::post('/submitPushSubscription', 'NotificationEndpointController@store');
 
     /**
      * WHISLIST

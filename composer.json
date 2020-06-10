@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.0",
         "mpociot/laravel-apidoc-generator": "^4.8",
         "nesbot/carbon": "^2.34",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "minishlink/web-push": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
