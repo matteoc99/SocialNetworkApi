@@ -105,5 +105,16 @@ class LikeController extends Controller
         }
         return response("disliked", 200);
     }
+    /**
+     * Unlike Comment
+     * removes a like/dislike on a comment
+     * @authenticated
+     */
+    public function unlikeComment (Comment $comment)
+    {
 
+        $comment->commentlikes()->where("user_id","=",$this->authUser()->id)->delete();
+
+        return response("removed like", 200);
+    }
 }

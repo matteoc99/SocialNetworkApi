@@ -29,7 +29,11 @@ class Comment extends Model
         return $this->belongsToMany('App\User',"comment_like")->withPivot("liked");
 
     }
+    public function commentlikes()
+    {
+        return $this->hasMany('App\CommentLike');
 
+    }
     public static function boot() {
         parent::boot();
 
