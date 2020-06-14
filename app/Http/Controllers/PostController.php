@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return $this->authUser()->posts;
+        return array_values($this->authUser()->posts->sortByDesc("id")->toArray());
     }
 
     /**
@@ -41,6 +41,7 @@ class PostController extends Controller
             Post::all()
                 ->whereIn("user_id", $this->authUser()->friends->pluck("id"))
                 ->where("post_visibility", ">=", 1)
+                ->sortByDesc("id")
                 ->toArray());
     }
 
