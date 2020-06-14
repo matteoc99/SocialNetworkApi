@@ -25,7 +25,18 @@ class NotificationEndpointController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "subscription " => "required",
+        ]);
+        
+        $subscription = $request->get("subscription");
+        
+        $notif_ep = new NotificationEndpoint();
+        $notif_ep->user_id = $this->authUser()->id;
+        $notif_ep->endpoint = $subscription;
+        $notif_ep->save();
+        
+        return response($notif_ep, 200);
     }
 
     /**

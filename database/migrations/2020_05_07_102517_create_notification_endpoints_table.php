@@ -17,7 +17,6 @@ class CreateNotificationEndpointsTable extends Migration
             $table->id();
             $table->bigInteger("user_id")->unsigned();
             $table->string("endpoint");
-            $table->dateTime("last_heartbeat");
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
