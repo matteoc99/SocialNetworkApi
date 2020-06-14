@@ -109,6 +109,13 @@ class UserController extends Controller
             $user->post_visibility = $request->get("post_visibility");
             $user->show_location = $request->get("show_location");
 
+            if ($request->filled('notifications_status')) {
+                $user->notifications_status = $request->get("notifications_status");
+            }
+            if ($request->filled('auto_renew')) {
+                $user->auto_renew = $request->get("auto_renew");
+            }
+
             if ($request->hasFile("profile_image")) {
                 $file = $request->file("profile_image");
 
