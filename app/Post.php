@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
-    protected $with = ["likes"];
+    protected $with = ["likes","user"];
 
 
     public function user()
