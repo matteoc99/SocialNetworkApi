@@ -44,7 +44,7 @@ class PasswordResetSuccess extends Notification
             ->line('You have changed your password successful.')
             ->line('If you did change password, no further action is required.')
             ->line('If you did not change password, protect your account.')
-            ->action('Change your password', "https://retronet.social/account");
+            ->action('Change your password', "https://retronet.social/settings");
     }
 
     /**
