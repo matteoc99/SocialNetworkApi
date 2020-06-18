@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 class NotificationController extends Controller
 {
     /**
+     * Get Notifications
      * Retrives all notifications of the user
      * @return array
      */
