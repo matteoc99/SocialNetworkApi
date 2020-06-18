@@ -26,7 +26,7 @@ class NotificationEndpointController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "subscription " => "required",
+            "subscription" => "required",
         ]);
         
         $subscription = $request->get("subscription");
