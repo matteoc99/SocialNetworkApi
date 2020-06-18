@@ -8,6 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Notification::class, function (Faker $faker) {
     return [
         "user_id" => random_int(1, 5),
+        "from_id" => random_int(1, 5),
+        "type" => random_int(1, 5),
         "read" => $faker->boolean,
         "payload" => $faker->sentence,
     ];
