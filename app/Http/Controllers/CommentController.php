@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Notification;
 use App\Post;
 use Illuminate\Http\Request;
 /**
@@ -41,6 +42,9 @@ class CommentController extends Controller
         $comment->parent_id = null;
         $comment->content = $request->get("text");
         $comment->save();
+        $notification =  new Notification();
+        $notification->setup($post->user_id,"New Comment",$this->authUser()->name." left a comment on one of your posts, go check it out.",3,$post->id);
+
         return response($comment,200);
     }
 
@@ -65,6 +69,9 @@ class CommentController extends Controller
         $c->parent_id = $comment->id;
         $c->content = $request->get("text");
         $c->save();
+        $notification =  new Notification();
+        $notification->setup($comment->user_id,"New Reply",$this->authUser()->name." replied to your comment",4,$post->id);
+
         return response($c,200);
     }
 

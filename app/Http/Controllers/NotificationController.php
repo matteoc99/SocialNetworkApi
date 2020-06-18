@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Notification;
+use App\Post;
 use Illuminate\Http\Request;
 
+
+/**
+ * @group Notifications
+ *
+ * APIs for managing user
+ */
 class NotificationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Retrives all notifications of the user
+     * @return array
      */
     public function index()
     {
-        //
+         return array_values($this->authUser()->myNotifications->toArray());
     }
 
     /**

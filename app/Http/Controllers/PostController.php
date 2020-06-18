@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -91,6 +92,11 @@ class PostController extends Controller
         $post->text = $request->get("text");
 
         $post->save();
+
+
+        foreach ( $this->authUser()->friends->pluck("id") as $friend)
+          $notification =  new Notification();
+        $notification->setup($friend,"New Post",$this->authUser()->name." has posted something",2,$this->authUser()->id);
 
         return response($post, 200);
 

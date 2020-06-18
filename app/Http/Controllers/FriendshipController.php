@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Friendship;
 use App\Http\Resources\UserLocationResource;
+use App\Notification;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,9 @@ class FriendshipController extends Controller
      */
     public function requestFriend($friend)
     {
+
+
+
         $mutualRequest = Friendship::where("user_1_id","=",$friend)->first();
         if (!$mutualRequest) {
             $alreadyRequested = Friendship::where("user_1_id","=",$this->authUser()->id)->first();
@@ -85,6 +89,10 @@ class FriendshipController extends Controller
                 $friendship->user_1_id = $this->authUser()->id;
                 $friendship->user_2_id = $friend;
                 $friendship->save();
+
+                $notification =  new Notification();
+                $notification->setup($friend,"New Friendship request",$this->authUser()->name." requested your friendship",1,$this->authUser()->id);
+
                 return response("friendship issued",200);
 
             }else{
@@ -93,7 +101,11 @@ class FriendshipController extends Controller
         }else{
             $mutualRequest->status =1;
             $mutualRequest->save();
+            $notification =  new Notification();
+            $notification->setup($friend,"New Friendship",$this->authUser()->name." is now your friend",0,$this->authUser()->id);
+
             return response("mutual friendship accepted",200);
+
         }
     }
     /**
@@ -108,6 +120,9 @@ class FriendshipController extends Controller
         }
         $friendReq->status = 1;
         $friendReq->update();
+        $notification =  new Notification();
+        $notification->setup($friend,"New Friendship",$this->authUser()->name." is now your friend",0,$this->authUser()->id);
+
         return response("",200);
 
     }

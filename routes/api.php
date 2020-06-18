@@ -79,6 +79,7 @@ Route::group(['middleware'=>['auth']],function (){
 
 	// Push notifications
 	Route::post('/submitPushSubscription', 'NotificationEndpointController@store');
+	Route::get('/notifications', 'NotificationController@index');
 
     /**
      * WHISLIST
