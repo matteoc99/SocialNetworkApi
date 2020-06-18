@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Builder::defaultStringLength(4095);
+        \Illuminate\Database\Schema\Builder::defaultStringLength(4095);
     }
 }
