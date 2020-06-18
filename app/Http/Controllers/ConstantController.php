@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Config;
 /**
  * @group Constants
  *
- * APIs for looking up comments
+ * APIs for looking up connstants
  */
 class ConstantController extends Controller
 {
     /**
-     * ret
+     * retrives all global reference constants
      */
     public function index()
     {
