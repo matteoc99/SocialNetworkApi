@@ -18,6 +18,7 @@ class UserLocationResource extends JsonResource
     {
         return [
             "id"=> $this->id,
+            "profile_image"=> $this->profile_image,
             "lat"=> $this->lat,
             "lng"=> $this->lng,
             "name"=> $this->name,
