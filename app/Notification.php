@@ -25,10 +25,8 @@ class Notification extends Model
         return $this->belongsTo('App\User');
     }
 
-
-
-
     public function sendNotification(){
         error_log($this);
     }
+
 }
