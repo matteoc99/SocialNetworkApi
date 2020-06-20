@@ -119,3 +119,4 @@ fabric.properties
 queue/*
 resources/
 !resources/views/dummy
+public/docs/
