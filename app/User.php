@@ -66,7 +66,7 @@ class User extends Authenticable implements JWTSubject
     public function unreadNotifications(){
         return $this->myNotifications()->where("read","=","0")->get();
     }
-    public function notificationEndpoint(){
+    public function notificationEndpoints(){
         return $this->hasMany('App\NotificationEndpoint');
     }
     public function userActions(){
