@@ -27,9 +27,6 @@ class Notification extends Model
         return $this->belongsTo('App\User');
     }
 
-
-
-
     public function sendNotification(){
 		$auth = [
 			'VAPID' => [
@@ -41,16 +38,15 @@ class Notification extends Model
 		
 		$webPush = new WebPush($auth);
 		$webPush->setAutomaticPadding(0);
-		//$subscriptions = $this->authUser()->notificationEndpoints();
-		$subscriptions = User::where('id', $this->user_id)->get()->first()->notificationEndpoints();
-		//$icon = User::where('id', $this->from_id)->get()->first()->profilePicture;
+		$subscriptions = User::where('id', $this->user_id)->get()->first()->notificationEndpoints;
+		$icon = $this->authUser()->profilePicture ?? "speck";
 		
 		foreach($subscriptions as $sub) {
 			$webPush->sendNotification(
 				Subscription::create(
 					json_decode($sub->endpoint, true)
 				),
-				'{"type": '.$this->type.', "text": "'.$this->payload.'", "title": "'.$this->title.'", "icon": "speck"}'
+				'{"type": '.$this->type.', "text": "'.$this->payload.'", "title": "'.$this->title.'", "icon": "'.$icon.'"}'
 				//"{'type': {$this->type}, 'text': '{$this->payload}', 'title': '{.$this->title}', 'icon': '{$icon}'}"
 			);
 		}
@@ -59,11 +55,19 @@ class Notification extends Model
 			$endpoint = $report->getRequest()->getUri()->__toString();
 
 			if ($report->isSuccess()) {
-				Log::info("[v] Message sent successfully for subscription {$endpoint}.");
+				\Log::info("[v] Message sent successfully for subscription {$endpoint}.");
 			} else {
-				Log::error("[x] Message failed to sent for subscription {$endpoint}: {$report->getReason()}");
+				\Log::error("[x] Message failed to sent for subscription {$endpoint}: {$report->getReason()}");
 			}
 		}
-		
+    }
+    
+    public function authUser(){
+        try{
+            $user = auth()->userOrFail();
+        }catch (UserNotDefinedException $exe){
+            return response()->json(["error"=>$exe->getMessage()],401);
+        }
+        return $user;
     }
 }
