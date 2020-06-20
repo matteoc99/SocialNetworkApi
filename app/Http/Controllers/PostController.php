@@ -94,10 +94,11 @@ class PostController extends Controller
         $post->save();
 
 
-        foreach ( $this->authUser()->friends->pluck("id") as $friend)
-          $notification =  new Notification();
-        $notification->setup($friend,"New Post",$this->authUser()->name." has posted something",2,$this->authUser()->id);
-
+        foreach($this->authUser()->friends->pluck("id") as $friend) {
+			$notification = new Notification();
+			$notification->setup($friend,"New Post",$this->authUser()->name." has posted something",2,$this->authUser()->id);
+		}
+	
         return response($post, 200);
 
     }
