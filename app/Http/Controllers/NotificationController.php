@@ -21,7 +21,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-         return array_values($this->authUser()->myNotifications->toArray());
+         return array_values($this->authUser()->myNotifications->sortByDesc("id")->toArray());
     }
 
     /**
