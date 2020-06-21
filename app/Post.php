@@ -24,8 +24,6 @@ class Post extends Model
     {
         return $this->user()->name;
     }
-
-
     public function likes()
     {
         return $this->belongsToMany('App\User', "post_like")->withPivot("liked");

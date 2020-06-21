@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
 
-    protected $with = ['likes','replies'];
+    protected $with = ['likes','replies',"user"];
 
     public function post(){
         return $this->belongsTo('App\Post');
