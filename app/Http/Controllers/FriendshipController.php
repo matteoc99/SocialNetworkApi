@@ -42,8 +42,8 @@ class FriendshipController extends Controller
      */
     public function removeFriend($friend)
     {
-        $this->authUser()->myFriendships->where("user_2_id", $friend)->each->delete();
-        $this->authUser()->friendshipsWithMe->where("user_1_id", $friend)->each->delete();
+        $this->authUser()->myFriendships->where("user_2_id", $friend)->first()->delete();
+        $this->authUser()->friendshipsWithMe->where("user_1_id", $friend)->first()->delete();
         return response("",200);
 
     }
