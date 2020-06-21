@@ -117,4 +117,17 @@ class LikeController extends Controller
 
         return response("removed like", 200);
     }
+
+    /**
+     * Unlike Post
+     * removes a like/dislike on a Post
+     * @authenticated
+     */
+    public function unlikePost (Post $post)
+    {
+
+        $post->postlikes()->where("user_id","=",$this->authUser()->id)->delete();
+
+        return response("removed like", 200);
+    }
 }

@@ -30,6 +30,11 @@ class Post extends Model
     {
         return $this->belongsToMany('App\User', "post_like")->withPivot("liked");
     }
+    public function postlikes()
+    {
+        return $this->hasMany('App\PostLike');
+
+    }
 
     public static function boot()
     {
