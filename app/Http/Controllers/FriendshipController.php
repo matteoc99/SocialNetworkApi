@@ -79,9 +79,9 @@ class FriendshipController extends Controller
 
 
 
-        $mutualRequest = Friendship::where("user_1_id","=",$friend)->first();
+        $mutualRequest = Friendship::where("user_1_id","=",$friend)->where("user_2_id","=",$this->authUser()->id)->first();
         if (!$mutualRequest) {
-            $alreadyRequested = Friendship::where("user_1_id","=",$this->authUser()->id)->first();
+            $alreadyRequested = Friendship::where("user_1_id","=",$this->authUser()->id)->where("user_2_id","=",$friend)->first();
             if (!$alreadyRequested) {
 
                 $friendship = new Friendship();
