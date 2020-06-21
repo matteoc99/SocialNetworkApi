@@ -83,7 +83,7 @@ class CommentController extends Controller
      */
     public function commentsOfPost(Post $post)
     {
-        return Comment::where(['post_id'=>$post->id,'parent_id'=>null])->get();
+        return Comment::where(['post_id'=>$post->id,'parent_id'=>null])->orderBy("id")->get();
     }
 
     /**
