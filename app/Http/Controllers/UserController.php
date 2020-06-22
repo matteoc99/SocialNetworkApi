@@ -107,8 +107,9 @@ class UserController extends Controller
             $user->name = $request->get("name");
             $user->email = $request->get("email");
             $user->post_visibility = $request->get("post_visibility");
-            $user->show_location = $request->get("show_location");
+            $user->show_location = ($request->get("show_location")=="true")?true:false;
 
+	
             if ($request->filled('notifications_status')) {
                 $user->notifications_status = $request->get("notifications_status");
             }
