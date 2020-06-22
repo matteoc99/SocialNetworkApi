@@ -39,7 +39,7 @@ class Notification extends Model
 		$webPush = new WebPush($auth);
 		$webPush->setAutomaticPadding(0);
 		$subscriptions = User::where('id', $this->user_id)->get()->first()->notificationEndpoints;
-		$icon = $this->authUser()->profilePicture ?? "default";
+		$icon = $this->authUser()->profile_image ?? "default";
 		
 		foreach($subscriptions as $sub) {
 			$webPush->sendNotification(
