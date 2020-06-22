@@ -102,7 +102,7 @@ class UserController extends Controller
                 "show_location" => "required",
             ]);
 
-            $uuid = null;
+            $uuid = $user->profile_image;
 
             $user->name = $request->get("name");
             $user->email = $request->get("email");
